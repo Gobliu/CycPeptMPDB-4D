@@ -1,0 +1,229 @@
+/home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.32.log
+From pdb {'C': 44, 'H': 55, 'N': 8, 'O': 7} From csv {'C': 44, 'H': 54, 'N': 8, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.32.log
+/home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.33.log
+From pdb {'C': 44, 'H': 55, 'N': 8, 'O': 7} From csv {'C': 44, 'H': 54, 'N': 8, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.33.log
+/home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.49.log
+From pdb {'C': 41, 'H': 71, 'N': 17, 'O': 6} From csv {'C': 40, 'H': 65, 'N': 17, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2015_Wang/Compound.49.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-01.log
+From pdb {'C': 36, 'H': 53, 'N': 6, 'O': 7} From csv {'C': 35, 'Cl': 1, 'H': 53, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-01.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-02.log
+From pdb {'C': 38, 'H': 57, 'N': 6, 'O': 6} From csv {'C': 37, 'Cl': 1, 'H': 57, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-02.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-03.log
+From pdb {'C': 40, 'H': 53, 'N': 6, 'O': 6} From csv {'C': 39, 'Cl': 1, 'H': 53, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-03.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-04.log
+From pdb {'C': 40, 'H': 59, 'N': 6, 'O': 6} From csv {'C': 39, 'Cl': 1, 'H': 59, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-04.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-05.log
+From pdb {'C': 39, 'H': 57, 'N': 6, 'O': 7} From csv {'C': 38, 'Cl': 1, 'H': 57, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-05.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-06.log
+From pdb {'C': 39, 'H': 59, 'N': 6, 'O': 7} From csv {'C': 38, 'Cl': 1, 'H': 59, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-06.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-07.log
+From pdb {'C': 40, 'H': 54, 'N': 7, 'O': 6} From csv {'C': 39, 'Cl': 1, 'H': 54, 'N': 7, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-07.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-08.log
+From pdb {'C': 41, 'H': 63, 'N': 6, 'O': 6} From csv {'C': 40, 'Cl': 1, 'H': 63, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-08.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-09.log
+From pdb {'C': 42, 'H': 57, 'N': 6, 'O': 6} From csv {'C': 41, 'Cl': 1, 'H': 57, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-09.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-10.log
+From pdb {'C': 41, 'H': 55, 'N': 6, 'O': 7} From csv {'C': 40, 'Cl': 1, 'H': 55, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-10.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-11.log
+From pdb {'C': 40, 'H': 57, 'N': 8, 'O': 6} From csv {'C': 39, 'Cl': 1, 'H': 57, 'N': 8, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-11.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-12.log
+From pdb {'C': 40, 'H': 58, 'N': 7, 'O': 7} From csv {'C': 39, 'Cl': 1, 'H': 58, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-12.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-13.log
+From pdb {'C': 43, 'H': 59, 'N': 6, 'O': 6} From csv {'C': 42, 'Cl': 1, 'H': 59, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-13.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-14.log
+From pdb {'C': 42, 'H': 57, 'N': 6, 'O': 7} From csv {'C': 41, 'Cl': 1, 'H': 57, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-14.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-15.log
+From pdb {'C': 43, 'H': 65, 'N': 6, 'O': 6} From csv {'C': 42, 'Cl': 1, 'H': 65, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-15.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-16.log
+From pdb {'C': 42, 'H': 63, 'N': 6, 'O': 7} From csv {'C': 41, 'Cl': 1, 'H': 63, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-16.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-17.log
+From pdb {'C': 44, 'H': 61, 'N': 6, 'O': 6} From csv {'C': 43, 'Cl': 1, 'H': 61, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-17.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-18.log
+From pdb {'C': 43, 'H': 60, 'N': 7, 'O': 6} From csv {'C': 42, 'Cl': 1, 'H': 60, 'N': 7, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-18.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-19.log
+From pdb {'C': 45, 'H': 63, 'N': 6, 'O': 6} From csv {'C': 44, 'Cl': 1, 'H': 63, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-19.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-20.log
+From pdb {'C': 44, 'H': 61, 'N': 6, 'O': 7} From csv {'C': 43, 'Cl': 1, 'H': 61, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-20.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-21.log
+From pdb {'C': 43, 'H': 63, 'N': 8, 'O': 6} From csv {'C': 42, 'Cl': 1, 'H': 63, 'N': 8, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-21.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-22.log
+From pdb {'C': 46, 'H': 57, 'N': 6, 'O': 6} From csv {'C': 45, 'Cl': 1, 'H': 57, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-22.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-23.log
+From pdb {'C': 43, 'H': 64, 'N': 7, 'O': 7} From csv {'C': 42, 'Cl': 1, 'H': 64, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-23.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-24.log
+From pdb {'C': 46, 'H': 63, 'N': 6, 'O': 6} From csv {'C': 45, 'Cl': 1, 'H': 63, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-24.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-25.log
+From pdb {'C': 45, 'H': 61, 'N': 6, 'O': 7} From csv {'C': 44, 'Cl': 1, 'H': 61, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-25.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-26.log
+From pdb {'C': 46, 'H': 58, 'N': 7, 'O': 6} From csv {'C': 45, 'Cl': 1, 'H': 58, 'N': 7, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-26.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-27.log
+From pdb {'C': 46, 'H': 59, 'N': 6, 'O': 7} From csv {'C': 45, 'Cl': 1, 'H': 59, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-27.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-28.log
+From pdb {'C': 48, 'H': 61, 'N': 6, 'O': 6} From csv {'C': 47, 'Cl': 1, 'H': 61, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-28.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-29.log
+From pdb {'C': 47, 'H': 59, 'N': 6, 'O': 7} From csv {'C': 46, 'Cl': 1, 'H': 59, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-29.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-30.log
+From pdb {'C': 48, 'H': 63, 'N': 6, 'O': 6} From csv {'C': 47, 'Cl': 1, 'H': 63, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-30.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-31.log
+From pdb {'C': 46, 'H': 61, 'N': 8, 'O': 6} From csv {'C': 45, 'Cl': 1, 'H': 61, 'N': 8, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-31.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-32.log
+From pdb {'C': 46, 'H': 62, 'N': 7, 'O': 7} From csv {'C': 45, 'Cl': 1, 'H': 62, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-32.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-33.log
+From pdb {'C': 50, 'H': 59, 'N': 6, 'O': 6} From csv {'C': 49, 'Cl': 1, 'H': 59, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-33.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-34.log
+From pdb {'C': 50, 'H': 65, 'N': 6, 'O': 6} From csv {'C': 49, 'Cl': 1, 'H': 65, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-34.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-35.log
+From pdb {'C': 49, 'H': 63, 'N': 6, 'O': 7} From csv {'C': 48, 'Cl': 1, 'H': 63, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-35.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-36.log
+From pdb {'C': 50, 'H': 60, 'N': 7, 'O': 6} From csv {'C': 49, 'Cl': 1, 'H': 60, 'N': 7, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-36.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-37.log
+From pdb {'C': 52, 'H': 63, 'N': 6, 'O': 6} From csv {'C': 51, 'Cl': 1, 'H': 63, 'N': 6, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-37.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-38.log
+From pdb {'C': 51, 'H': 61, 'N': 6, 'O': 7} From csv {'C': 50, 'Cl': 1, 'H': 61, 'N': 6, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-38.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-39.log
+From pdb {'C': 50, 'H': 63, 'N': 8, 'O': 6} From csv {'C': 49, 'Cl': 1, 'H': 63, 'N': 8, 'O': 6} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-39.log
+/home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-40.log
+From pdb {'C': 50, 'H': 64, 'N': 7, 'O': 7} From csv {'C': 49, 'Cl': 1, 'H': 64, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2016_Furukawa/1.6-40.log
+/home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6009.log
+From pdb {'C': 53, 'H': 91, 'N': 9, 'O': 11} From csv {'C': 51, 'H': 87, 'N': 9, 'O': 11} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6009.log
+/home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6012.log
+From pdb {'C': 53, 'H': 91, 'N': 9, 'O': 11} From csv {'C': 52, 'H': 89, 'N': 9, 'O': 11} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6012.log
+/home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6512.log
+From pdb {'C': 52, 'H': 89, 'N': 9, 'O': 11} From csv {'C': 53, 'H': 91, 'N': 9, 'O': 11} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6512.log
+/home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6580.log
+From pdb {'C': 52, 'H': 89, 'N': 9, 'O': 11} From csv {'C': 53, 'H': 91, 'N': 9, 'O': 11} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_6580.log
+/home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_7051.log
+From pdb {'C': 53, 'H': 91, 'N': 9, 'O': 11} From csv {'C': 54, 'H': 93, 'N': 9, 'O': 11} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2021_Kelly/Kelly_7051.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Abu5.log
+From pdb {'C': 37, 'H': 57, 'N': 7, 'O': 7} From csv {'C': 33, 'H': 55, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3.log
+From pdb {'C': 39, 'H': 61, 'N': 7, 'O': 7} From csv {'C': 35, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Abu5.log
+From pdb {'C': 40, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 36, 'H': 61, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Chg5.log
+From pdb {'C': 41, 'H': 57, 'N': 7, 'O': 7} From csv {'C': 37, 'H': 55, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3HPhe5.log
+From pdb {'C': 44, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 39, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Nal5.log
+From pdb {'C': 47, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 42, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Ala3Nal5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Abu5.log
+From pdb {'C': 43, 'H': 67, 'N': 7, 'O': 7} From csv {'C': 39, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Chg5.log
+From pdb {'C': 44, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 40, 'H': 61, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_HPhe5.log
+From pdb {'C': 47, 'H': 69, 'N': 7, 'O': 7} From csv {'C': 42, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3.log
+From pdb {'C': 45, 'H': 71, 'N': 7, 'O': 7} From csv {'C': 41, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Nal5.log
+From pdb {'C': 50, 'H': 69, 'N': 7, 'O': 7} From csv {'C': 45, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Nal5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Chg5.log
+From pdb {'C': 47, 'H': 67, 'N': 7, 'O': 7} From csv {'C': 43, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3HPhe5.log
+From pdb {'C': 50, 'H': 73, 'N': 7, 'O': 7} From csv {'C': 45, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Nal5.log
+From pdb {'C': 53, 'H': 73, 'N': 7, 'O': 7} From csv {'C': 48, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye2_Cha3Nal5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Abu5.log
+From pdb {'C': 37, 'H': 57, 'N': 7, 'O': 7} From csv {'C': 33, 'H': 55, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2.log
+From pdb {'C': 39, 'H': 61, 'N': 7, 'O': 7} From csv {'C': 35, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Abu5.log
+From pdb {'C': 40, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 36, 'H': 61, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Chg5.log
+From pdb {'C': 41, 'H': 57, 'N': 7, 'O': 7} From csv {'C': 37, 'H': 55, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2HPhe5.log
+From pdb {'C': 44, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 39, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Nal5.log
+From pdb {'C': 47, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 42, 'H': 59, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Ala2Nal5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Abu5.log
+From pdb {'C': 43, 'H': 67, 'N': 7, 'O': 7} From csv {'C': 39, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Abu5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Chg5.log
+From pdb {'C': 44, 'H': 63, 'N': 7, 'O': 7} From csv {'C': 40, 'H': 61, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_HPhe5.log
+From pdb {'C': 47, 'H': 69, 'N': 7, 'O': 7} From csv {'C': 42, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2.log
+From pdb {'C': 45, 'H': 71, 'N': 7, 'O': 7} From csv {'C': 41, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Nal5.log
+From pdb {'C': 50, 'H': 69, 'N': 7, 'O': 7} From csv {'C': 45, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Nal5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Chg5.log
+From pdb {'C': 47, 'H': 67, 'N': 7, 'O': 7} From csv {'C': 43, 'H': 65, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Chg5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2HPhe5.log
+From pdb {'C': 50, 'H': 73, 'N': 7, 'O': 7} From csv {'C': 45, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2HPhe5.log
+/home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Nal5.log
+From pdb {'C': 53, 'H': 73, 'N': 7, 'O': 7} From csv {'C': 48, 'H': 69, 'N': 7, 'O': 7} False
+!!! Mismatch /home/liuwei/GitHub/Data/pdb_log/2022_Taechalertpaisarn/Pye3_Cha2Nal5.log
+Total mismatches: 76

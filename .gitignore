@@ -1,0 +1,20 @@
+# track changes
+# LW 20250513:
+# HK 20250526 -- temporarily add line 16,17
+
+# Ignore macOS files
+.DS_Store
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore NSCC related files
+out-run.txt
+jobsub.sh
+
+# Ignore preprocessed data and trained model
+*.pkl
+*.pth
+*.p
+*.pt

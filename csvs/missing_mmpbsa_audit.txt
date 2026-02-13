@@ -1,0 +1,66 @@
+
+[!] Found 54 peptides with missing Desolvation free energy.
+--------------------------------------------------------------------------------
+No.   | Source                    | ID           | Status      
+--------------------------------------------------------------------------------
+1     | 2020_Townsend             | 2525         | MISSING     
+2     | 2020_Townsend             | 2533         | MISSING     
+3     | 2020_Townsend             | 2724         | MISSING     
+4     | 2020_Townsend             | 2790         | MISSING     
+5     | 2020_Townsend             | 2795         | MISSING     
+6     | 2020_Townsend             | 2812         | MISSING     
+7     | 2020_Townsend             | 2911         | MISSING     
+8     | 2020_Townsend             | 2962         | MISSING     
+9     | 2020_Townsend             | 2976         | MISSING     
+10    | 2020_Townsend             | 3007         | MISSING     
+11    | 2020_Townsend             | 3010         | MISSING     
+12    | 2020_Townsend             | 3027         | MISSING     
+13    | 2020_Townsend             | 3037         | MISSING     
+14    | 2020_Townsend             | 3107         | MISSING     
+15    | 2020_Townsend             | 3128         | MISSING     
+16    | 2020_Townsend             | 3146         | MISSING     
+17    | 2020_Townsend             | 3158         | MISSING     
+18    | 2020_Townsend             | 3177         | MISSING     
+19    | 2020_Townsend             | 3190         | MISSING     
+20    | 2020_Townsend             | 3197         | MISSING     
+21    | 2020_Townsend             | 3213         | MISSING     
+22    | 2020_Townsend             | 3233         | MISSING     
+23    | 2020_Townsend             | 3235         | MISSING     
+24    | 2020_Townsend             | 3251         | MISSING     
+25    | 2020_Townsend             | 3257         | MISSING     
+26    | 2020_Townsend             | 3272         | MISSING     
+27    | 2020_Townsend             | 3277         | MISSING     
+28    | 2020_Townsend             | 3278         | MISSING     
+29    | 2020_Townsend             | 3288         | MISSING     
+30    | 2020_Townsend             | 3301         | MISSING     
+31    | 2020_Townsend             | 3305         | MISSING     
+32    | 2020_Townsend             | 3342         | MISSING     
+33    | 2020_Townsend             | 3351         | MISSING     
+34    | 2020_Townsend             | 3370         | MISSING     
+35    | 2020_Townsend             | 3373         | MISSING     
+36    | 2020_Townsend             | 3379         | MISSING     
+37    | 2020_Townsend             | 3382         | MISSING     
+38    | 2020_Townsend             | 3393         | MISSING     
+39    | 2020_Townsend             | 3420         | MISSING     
+40    | 2020_Townsend             | 3442         | MISSING     
+41    | 2020_Townsend             | 3451         | MISSING     
+42    | 2020_Townsend             | 3452         | MISSING     
+43    | 2020_Townsend             | 3455         | MISSING     
+44    | 2020_Townsend             | 3479         | MISSING     
+45    | 2020_Townsend             | 3505         | MISSING     
+46    | 2020_Townsend             | 3518         | MISSING     
+47    | 2020_Townsend             | 3521         | MISSING     
+48    | 2020_Townsend             | 3523         | MISSING     
+49    | 2020_Townsend             | 3531         | MISSING     
+50    | 2020_Townsend             | 3542         | MISSING     
+51    | 2020_Townsend             | 3544         | MISSING     
+52    | 2020_Townsend             | 3555         | MISSING     
+53    | 2020_Townsend             | 4946         | MISSING     
+54    | 2020_Townsend             | 5015         | MISSING     
+================================================================================
+Audit Summary
+================================================================================
+Total entries checked:        5160
+Values present:               5106
+Values missing:               54
+================================================================================

@@ -1,115 +1,137 @@
 import os
-import pandas as pd
 import shutil
+import pandas as pd
+from typing import List, Optional, Set
 
+def get_source_specific_filename(
+    row: pd.Series, 
+    file_type: str
+) -> str:
+    """
+    Generates the source filename based on publication-specific naming conventions.
+    """
+    source: str = row['Source']
+    cp_id: str = str(row['CycPeptMPDB_ID'])
+    orig_name: str = str(row.get('Original_Name_in_Source_Literature', ''))
 
-def check_exist_rename_move(source_dir, target_dir):
-    df = pd.read_csv("/home/liuw/GitHub/CycPeptMPDB-4D/csvs/CycPeptMPDB_Peptide_5publications.csv", low_memory=False)
+    if file_type == "log":
+        if source == '2015_Wang':
+            return f"2015_Wang_{cp_id}-{orig_name}_1st_frame.log"
+        elif source == '2016_Furukawa':
+            return f"2016_Furukawa_{cp_id}__{orig_name}_1st_frame.log"
+        elif source == '2018_Naylor':
+            return f"2018_Naylor_{cp_id}_1st_frame.log"
+        elif source == '2020_Townsend':
+            return f"2020_Townsend_{cp_id}-{orig_name}_1st_frame.log"
+        elif source == '2021_Kelly':
+            return f"2021_Kelly_{cp_id}_1st_frame.log"
+    
+    elif file_type == "pdb":
+        if source == '2015_Wang':
+            return f"2015_Wang_{cp_id}-{orig_name}_100frames_20.3-50ns.pdb"
+        elif source == '2016_Furukawa':
+            return f"2016_Furukawa_{cp_id}__{orig_name}_100frames_20.3-50ns.pdb"
+        elif source == '2018_Naylor':
+            return f"2018_Naylor_{cp_id}_100frames_20.3-50ns.pdb"
+        elif source == '2020_Townsend':
+            return f"2020_Townsend_{cp_id}-{orig_name}_100frames_20.3-50ns.pdb"
+        elif source == '2021_Kelly':
+            return f"2021_Kelly_{cp_id}_100frames_20.3-50ns.pdb"
+            
+    raise ValueError(f"Unsupported source/type combination: {source} / {file_type}")
 
-    missing_files = []
-    for idx, row in df.iterrows():
+def check_exist_rename_move(
+    csv_path: str, 
+    source_dir: str, 
+    target_dir: str, 
+    env: str,
+    mode: str = "log"
+) -> None:
+    """
+    Validates, renames, and moves files from a raw source directory to a standardized target directory.
+    
+    Args:
+        csv_path: Path to the metadata CSV.
+        source_dir: Directory containing raw files.
+        target_dir: Directory to move standardized files to.
+        env: The environment identifier (e.g., 'Hexane' or 'Water').
+        mode: 'log' for log files or 'pdb' for trajectory files.
+    """
+    assert os.path.exists(csv_path), f"CSV path does not exist: {csv_path}"
+    assert os.path.exists(source_dir), f"Source directory does not exist: {source_dir}"
+    os.makedirs(target_dir, exist_ok=True)
 
-        # ===== For Hexane Trajectories =====
-        # if row['Source'] == '2015_Wang':
-        #     pdb_path = os.path.join(source_dir, "2015_Wang",f"{row['Original_Name_in_Source_Literature']}_100frames.pdb")
-        # elif row['Source'] == '2016_Furukawa':
-        #     pdb_path = os.path.join(source_dir, "2016_Furukawa",f"{row['Original_Name_in_Source_Literature']}_100frames_princ.pdb")
-        # elif row['Source'] == '2018_Naylor':
-        #     pdb_path = os.path.join(source_dir, "2018_Naylor",f"Naylor_{row['CycPeptMPDB_ID']}_100frames.pdb")
-        # elif row['Source'] == '2020_Townsend':
-        #     pdb_path = os.path.join(source_dir, "2020_Townsend",f"2020_Townsend_{row['CycPeptMPDB_ID']}-{row['Original_Name_in_Source_Literature']}_100frames.pdb")
-        # elif row['Source'] == '2021_Kelly':
-        #     pdb_path = os.path.join(source_dir, "2021_Kelly",f"2021_Kelly_{row['CycPeptMPDB_ID']}_100frames.pdb")
-        # else:
-        #     continue
+    df: pd.DataFrame = pd.read_csv(csv_path, low_memory=False)
+    valid_sources: Set[str] = {"2015_Wang", "2016_Furukawa", "2018_Naylor", "2020_Townsend", "2021_Kelly"}
+    
+    missing_files: List[str] = []
+    processed_count: int = 0
 
-        # target_path = os.path.join(target_dir, f"{row['Source']}_{row['CycPeptMPDB_ID']}.pdb")
+    # Map environment name to standardized suffix shorthand
+    env_suffix_map = {"Water": "H2O", "Hexane": "Hexane"}
+    env_label = env_suffix_map.get(env, env)
 
-        # ===== For Hexane Logs =====
-        if row['Source'] == '2015_Wang':
-            pdb_path = os.path.join(source_dir, "2015_Wang",f"{row['Original_Name_in_Source_Literature']}.log")
-        elif row['Source'] == '2016_Furukawa':
-            pdb_path = os.path.join(source_dir, "2016_Furukawa",f"{row['Original_Name_in_Source_Literature']}.log")
-        elif row['Source'] == '2018_Naylor':
-            pdb_path = os.path.join(source_dir, "2018_Naylor",f"Naylor_{row['CycPeptMPDB_ID']}.log")
-        elif row['Source'] == '2020_Townsend':
-            pdb_path = os.path.join(source_dir, "2020_Townsend",f"{row['Original_Name_in_Source_Literature']}.log")
-        elif row['Source'] == '2021_Kelly':
-            pdb_path = os.path.join(source_dir, "2021_Kelly",f"Kelly_{row['CycPeptMPDB_ID']}.log")
+    for _, row in df.iterrows():
+        if row['Source'] not in valid_sources:
+            continue
+
+        # Standardized target name based on environment argument
+        suffix = f"{env_label}.log" if mode == "log" else f"{env_label}_Traj.pdb"
+        target_filename = f"{row['Source']}_{row['CycPeptMPDB_ID']}_{suffix}"
+        target_path = os.path.join(target_dir, target_filename)
+
+        # Calculate source path
+        try:
+            src_filename = get_source_specific_filename(row, file_type=mode)
+            src_full_path = os.path.join(source_dir, row['Source'], src_filename)
+        except ValueError as e:
+            print(f"Skipping row due to metadata error: {e}")
+            continue
+
+        # Logic Fix: Even if target exists, we check the source to ensure integrity
+        source_exists = os.path.exists(src_full_path)
+        target_exists = os.path.exists(target_path)
+
+        if target_exists:
+            # File already processed
+            # print(f"Target already exists, skipping: {target_path}")
+            continue
+
+        if source_exists:
+            print(f"Moving: {src_full_path} -> {target_path}")
+            shutil.move(src_full_path, target_path)
+            processed_count += 1
         else:
+            # print(f"Missing source file: {src_full_path}")
+            missing_files.append(src_full_path)
             continue
 
-        target_path = os.path.join(target_dir, f"{row['Source']}_{row['CycPeptMPDB_ID']}_Hexane.log")
-
-        if os.path.exists(target_path):
-            continue
-
-        if not os.path.exists(pdb_path):
-            missing_files.append(row['CycPeptMPDB_ID'])
-            print('Missing file:', pdb_path, "Counter:", len(missing_files))
-            continue
-
-        print(f'Moving {pdb_path} -> {target_path}')
-        shutil.move(pdb_path, target_path)
-    print(f"Total missing files: {len(missing_files)}")
-
-    #     pdb_path = f"{row['log_path'][:-4]}_1st_cluster.pdb"
-    #     if not os.path.exists(pdb_path):
-    #         pdb_path = f"{row['log_path'][:-4]}_1st_frame.pdb"
-    #     if not os.path.exists(pdb_path):
-    #         # print('File does not exist', row['log_path'])
-    #         missing_files.append(row['CycPeptMPDB_ID'])
-    #         continue
-
-    #     match_flag = pdb_checker(pdb_path, row['SMILES'])
-
-    #     if match_flag:
-    #         source = row['Source'].strip()
-    #         filename = f"{source}_{row['CycPeptMPDB_ID']}.pdb"
-    #         dest_path = os.path.join(match_pdb_dir.strip(), filename)
-    #         print(f'Moving {pdb_path} -> {dest_path}')
-    #         shutil.move(pdb_path, dest_path)
-    #     else:
-    #         print(f"!!! Mismatch {row['log_path']}")
-    #         mismatches.append((idx, row['SMILES']))
-    #         dest_path = os.path.join(mismatch_pdb_dir.strip(), pdb_path.split('/')[-1])
-    #         shutil.copy2(pdb_path, dest_path)
-    #         gen_path = dest_path[:-16] + '_rdkit.pdb'
-    #         smiles2pdb(row['SMILES'], gen_path)
-
-    # print(f"Total mismatches: {len(mismatches)}")
-
-def rename_files_in_folder(folder_path, extension, suffix):
-    # Iterate through all files in the folder
-    for file_name in os.listdir(folder_path):
-        # Check if the file has a .pdb extension
-        if file_name.endswith(extension):
-            # Construct the full path of the original file
-            old_file_path = os.path.join(folder_path, file_name)
-            
-            # Add "Hexane_Tarj" before the .pdb extension
-            new_file_name = file_name.replace(extension, f"{suffix}{extension}")
-            new_file_path = os.path.join(folder_path, new_file_name)
-            
-            # Rename the file
-            os.rename(old_file_path, new_file_path)
-            print(f"Renamed: {old_file_path} -> {new_file_path}")
-
+    print(f"\nProcessing Complete for mode: {mode} in environment: {env}")
+    print(f"Moved: {processed_count}")
+    print(f"Total missing from source: {len(missing_files)}")
 
 if __name__ == '__main__':
-    # df = pd.read_csv("/home/liuw/GitHub/CycPeptMPDB-4D/csvs/CycPeptMPDB_Peptide_All.csv", low_memory=False)
-    # # Filter the DataFrame to keep only rows where "Source" is in the specified list
-    # valid_sources = ["2015_Wang", "2016_Furukawa", "2018_Naylor", "2020_Townsend", "2021_Kelly"]
-    # df = df[df["Source"].isin(valid_sources)]
-    # df.to_csv("/home/liuw/GitHub/CycPeptMPDB-4D/csvs/CycPeptMPDB_Peptide_5publications.csv", index=False)
-
-    check_exist_rename_move(
-        source_dir='/home/liuw/GitHub/Data/CycPeptMPDB_4D/Hexane/Logs',
-        target_dir='/home/liuw/GitHub/Data/CycPeptMPDB_4D/Hexane/Logs'
-    )
-
-    # rename_files_in_folder(
-    #     folder_path='/home/liuw/GitHub/Data/CycPeptMPDB_4D/Hexane/Trajectories',
-    #     extension=".pdb",
-    #     suffix="_Hexane_Tarj"
+    # Configuration
+    BASE_PATH = "/home/liuw/GitHub"
+    REPO_PATH = os.path.join(BASE_PATH, "CycPeptMPDB-4D")
+    DATA_PATH = os.path.join(BASE_PATH, "Data", "CycPeptMPDB_4D")
+    
+    CSV_PATH = os.path.join(REPO_PATH, "csvs", "CycPeptMPDB_Peptide_5publications.csv")
+    
+    # 1. Process Water Logs
+    # check_exist_rename_move(
+    #     csv_path=CSV_PATH,
+    #     source_dir=os.path.join(DATA_PATH, "Water", "pdb_log_20.3-50ns"),
+    #     target_dir=os.path.join(DATA_PATH, "Water", "Logs"),
+    #     env="Water",
+    #     mode="log"
     # )
+
+    # 2. Process Hexane Trajectories
+    check_exist_rename_move(
+        csv_path=CSV_PATH,
+        source_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
+        target_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
+        env="Hexane",
+        mode="log"
+    )

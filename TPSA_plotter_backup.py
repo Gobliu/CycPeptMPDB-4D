@@ -1,10 +1,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
+
+# --- Path configuration ---
+REPO_ROOT = Path(__file__).parent
+HEXANE_FILE = REPO_ROOT / "csvs" / "all_hexane"
+WATER_FILE = REPO_ROOT / "csvs" / "all_water"
 
 # --- Load data ---
-hex_df = pd.read_csv('./csvs/all_hexane_sa.dat', sep=r'\s+')
-wat_df = pd.read_csv('./csvs/all_water_sa_clean.dat', sep=r'\s+')
+hex_df = pd.read_csv(HEXANE_FILE, delim_whitespace=True)
+wat_df = pd.read_csv(WATER_FILE, delim_whitespace=True)
 
 # --- Plot config ---
 colors = {"Hexane": "#4C72B0", "Water": "#C44E52"}

@@ -216,10 +216,11 @@ def _save(lines: List[str], output_txt: str) -> None:
 
 
 if __name__ == "__main__":
-    REPO_ROOT = Path("/home/liuw/GitHub/CycPeptMPDB-4D")
+    SCRIPT_DIR = Path(__file__).resolve().parent
+    REPO_ROOT = SCRIPT_DIR.parent
 
     FINAL_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
-    DATA_DIR = Path('/home/liuw/GitHub/Data/CycPeptMPDB_4D')
+    DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
     OUTPUT_TXT = REPO_ROOT / "csvs" / "missing_data_audit.txt"
 
     audit_missing_data(

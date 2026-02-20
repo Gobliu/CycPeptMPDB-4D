@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xxd:*)"
+    ],
+    "additionalDirectories": [
+      "/home/liuw/GitHub/CycPeptMPDB-4D/csvs"
+    ]
+  }
+}

@@ -137,8 +137,9 @@ def process_rmsd_data(
     print("=" * 70)
 
 if __name__ == "__main__":
-    REPO_ROOT = Path("/home/liuw/GitHub/CycPeptMPDB-4D")
-    BASE_DATA_DIR = Path('/home/liuw/GitHub/Data/CycPeptMPDB_4D')
+    SCRIPT_DIR = Path(__file__).resolve().parent
+    REPO_ROOT = SCRIPT_DIR.parent
+    BASE_DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
     
     # Use the existing output as input to allow iterative updates
     INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"

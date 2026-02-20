@@ -1,7 +1,15 @@
 import re
 import os
 import pandas as pd
-from typing import List, Optional, Generator, Set
+from typing import List, Optional, Generator
+
+ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
+RAW_TIME_NS_COLUMN_MAP = {
+    "Water": "Water_raw_time_ns",
+    "Hexane": "Hexane_raw_time_ns",
+}
+SUPPORTED_ENVS = tuple(ENV_SUFFIX_MAP.keys())
+
 
 def get_cluster_middle_time(log_file_path: str) -> Optional[float]:
     """
@@ -65,8 +73,14 @@ def extract_pdb_by_time(input_pdb: str, output_pdb: str, target_time_ps: float) 
 def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None:
     """
     Processes logs and trajectories to extract middle-cluster structures.
-    Tracks and reports missing files specifically (log-only vs traj-only).
+    Tracks and reports missing files specifically (log-only vs traj-only),
+    and writes env-specific raw_time_ns into the input CSV.
     """
+    assert env_name in SUPPORTED_ENVS, (
+        f"Unsupported environment: {env_name}. "
+        f"Supported environments are: {', '.join(SUPPORTED_ENVS)}"
+    )
+
     env_dir = os.path.join(base_data_dir, env_name)
     log_dir = os.path.join(env_dir, "Logs")
     traj_dir = os.path.join(env_dir, "Trajectories")
@@ -79,9 +93,17 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
     os.makedirs(str_dir, exist_ok=True)
 
     df: pd.DataFrame = pd.read_csv(csv_path, low_memory=False)
-    
-    env_suffix_map = {"Water": "H2O", "Hexane": "Hexane"}
-    env_tag = env_suffix_map.get(env_name, env_name)
+    required_cols = {"Source", "CycPeptMPDB_ID"}
+    missing_required = required_cols - set(df.columns)
+    assert not missing_required, f"CSV missing required columns: {missing_required}"
+
+    for col in ("Water_Structure_ID", "Hexane_Structure_ID", "raw_time_ns"):
+        if col in df.columns:
+            df = df.drop(columns=[col])
+
+    raw_time_col = RAW_TIME_NS_COLUMN_MAP[env_name]
+    if raw_time_col not in df.columns:
+        df[raw_time_col] = pd.NA
     
     # Categorization for reporting
     missing_both: List[str] = []
@@ -90,12 +112,25 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
     error_files: List[str] = []
     processed_count: int = 0
 
-    for _, row in df.iterrows():
-        id_tag = f"{row['Source']}_{row['CycPeptMPDB_ID']}_{env_tag}"
+    for idx, row in df.iterrows():
+        source = str(row["Source"]).strip()
+        cp_id = str(row["CycPeptMPDB_ID"]).strip()
+        env_suffix = ENV_SUFFIX_MAP[env_name]
+        id_tag = f"{source}_{cp_id}_{env_suffix}"
         
         log_path = os.path.join(log_dir, f"{id_tag}.log")
         traj_path = os.path.join(traj_dir, f"{id_tag}_Traj.pdb")
         structure_path = os.path.join(str_dir, f"{id_tag}_Str.pdb")
+
+        raw_time_ns: Optional[float] = None
+        if os.path.exists(log_path):
+            try:
+                raw_time_ns = get_cluster_middle_time(log_path)
+                if raw_time_ns is not None:
+                    df.at[idx, raw_time_col] = raw_time_ns
+            except (AssertionError, Exception) as e:
+                print(f"Error parsing raw_time_ns from {log_path}: {e}")
+                error_files.append(id_tag)
 
         if os.path.exists(structure_path):
             processed_count += 1
@@ -118,7 +153,6 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
         print(f"[{env_name}] Processing ID: {id_tag}")
         
         try:
-            raw_time_ns = get_cluster_middle_time(log_path)
             assert raw_time_ns is not None, f"Cluster 1 middle time not found in {log_path}"
             
             target_time_ps = round(raw_time_ns * 1000.0, 4)
@@ -153,12 +187,18 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
         print(f"\n[X] PROCESSING ERRORS ({len(error_files)}):")
         # print("\n".join(error_files))
     print(f"="*50 + "\n")
+    df.to_csv(csv_path, index=False)
+    print(f"[{env_name}] Updated column in CSV: {raw_time_col}")
+    print(f"[{env_name}] CSV path: {csv_path}")
 
 def main():
-    CSV_PATH = "/home/liuw/GitHub/CycPeptMPDB-4D/csvs/CycPeptMPDB_Peptide_5publications.csv"
-    DATA_ROOT = "/home/liuw/GitHub/Data/CycPeptMPDB_4D"
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+    CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB-4D_clean.csv")
+    DATA_ROOT = os.path.join(os.path.dirname(REPO_ROOT), "Data", "CycPeptMPDB_4D")
     
-    process_structures(CSV_PATH, DATA_ROOT, "Hexane")
+    process_structures(CSV_PATH, DATA_ROOT, "Water")
+    # process_structures(CSV_PATH, DATA_ROOT, "Hexane")
 
 if __name__ == '__main__':
     main()

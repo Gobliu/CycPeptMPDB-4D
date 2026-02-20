@@ -112,11 +112,11 @@ def check_exist_rename_move(
 
 if __name__ == '__main__':
     # Configuration
-    BASE_PATH = "/home/liuw/GitHub"
-    REPO_PATH = os.path.join(BASE_PATH, "CycPeptMPDB-4D")
-    DATA_PATH = os.path.join(BASE_PATH, "Data", "CycPeptMPDB_4D")
-    
-    CSV_PATH = os.path.join(REPO_PATH, "csvs", "CycPeptMPDB_Peptide_5publications.csv")
+    SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+    DATA_PATH = os.path.join(os.path.dirname(REPO_ROOT), "Data", "CycPeptMPDB_4D")
+
+    CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB_Peptide_5publications.csv")
     
     # 1. Process Water Logs
     # check_exist_rename_move(

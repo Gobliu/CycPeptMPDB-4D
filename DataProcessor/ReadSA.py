@@ -1,8 +1,8 @@
-import os
-import re
 from pathlib import Path
 import numpy as np
 import pandas as pd
+
+from DataProcessor.utils import find_match_in_df
 
 
 def load_dat_file(dat_path: str) -> pd.DataFrame:
@@ -32,9 +32,7 @@ def process_sa_data(
     csv_p = Path(csv_path)
     all_df = pd.read_csv(csv_p, low_memory=False)
 
-    # 2. Load .dat files (each env can have multiple files, e.g. clean + bad)
     dat_files = {'Hexane': hexane_dat, 'Water': water_dat}
-
     feature_names = ['3D_SASA', '3D_NPSA', '3D_PSA']
 
     # Initialize empty columns for each env + feature combination
@@ -45,7 +43,6 @@ def process_sa_data(
                 all_df[col] = np.nan
 
     for env, dat_paths in dat_files.items():
-        # Support single path (str) or list of paths
         if isinstance(dat_paths, str):
             dat_paths = [dat_paths]
 
@@ -55,20 +52,11 @@ def process_sa_data(
             parts.append(load_dat_file(dp))
         sa_df = pd.concat(parts, ignore_index=True)
 
-        # Add direct mappings for Kelly_XXXX and Naylor_XXXX
         for alias in sa_df['alias']:
-            if alias.startswith('Kelly') or alias.startswith('Naylor'):
-                cyc_id = int(alias.split('_')[1])            
-                match_mask = all_df['CycPeptMPDB_ID'] == cyc_id
-                assert match_mask.any(), f"No match found in reference for CycPeptMPDB_ID: {cyc_id}"
-            else:
-                origin_name = alias[:-1] if alias.endswith('_') else alias
-                # print("origin_name:", origin_name)
-                match_mask = all_df['Original_Name_in_Source_Literature'] == origin_name
-                if not match_mask.any():        # Because some peptides from 2022_Taechalertpaisarn
-                    print(f"Warning: No match found in all_df for Original_Name_in_Source_Literature: {origin_name}")
-                    continue
-            print(f"Processing alias: {alias}, matches found: {match_mask.sum()}")        
+            match_mask, skip = find_match_in_df(alias, all_df)
+            if skip:
+                continue
+            print(f"Processing alias: {alias}, matches found: {match_mask.sum()}")
             ref_idx = all_df.index[match_mask][0]
             for feat in feature_names:
                 col = f'{env}_{feat}'
@@ -81,15 +69,19 @@ def process_sa_data(
 
 
 if __name__ == "__main__":
-    REPO_ROOT = Path("/home/liuw/GitHub/CycPeptMPDB-4D")
+    SCRIPT_DIR = Path(__file__).resolve().parent
+    REPO_ROOT = SCRIPT_DIR.parent
 
     INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
     OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
 
-    HEXANE_DAT = [str(REPO_ROOT / "csvs" / "all_hexane_sa.dat")]
+    HEXANE_DAT = [
+        str(REPO_ROOT / "csvs" / "hexa-hexane_sa"),
+        str(REPO_ROOT / "csvs" / "hepta-hexane_sa"),
+    ]
     WATER_DAT = [
-        str(REPO_ROOT / "csvs" / "all_water_sa_clean.dat"),
-        str(REPO_ROOT / "csvs" / "all_water_sa_bad.dat"),
+        str(REPO_ROOT / "csvs" / "hexa-water_sa"),
+        str(REPO_ROOT / "csvs" / "hepta-water_sa"),
     ]
 
     process_sa_data(

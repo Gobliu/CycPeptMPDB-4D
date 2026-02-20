@@ -14,3 +14,6 @@ jobsub.sh
 *.pth
 *.p
 *.pt
+
+# Explicitly allow data analysis data
+!pts/*.pt

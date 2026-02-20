@@ -37,7 +37,7 @@ from se3_transformer.model.transformer import SE3TransformerPooled
 # ---------------------------------------------------------------------------
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR
-CSV_PATH = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
+CSV_PATH = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
 DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
 
 # Environment-specific settings: (structures subdir, PDB filename suffix regex)
@@ -327,7 +327,7 @@ def main():
     parser = argparse.ArgumentParser(description="SE(3)-Transformer for PAMPA prediction")
 
     # Data
-    parser.add_argument("--csv", type=Path, default=CSV_PATH, help="Path to CycPeptMPDB-4D_clean.csv")
+    parser.add_argument("--csv", type=Path, default=CSV_PATH, help="Path to CycPeptMPDB-4D.csv")
     parser.add_argument("--env", type=str, default="hexane", choices=list(ENV_CONFIG.keys()),
                         help="Solvent environment: hexane or water")
     parser.add_argument("--structures", type=Path, default=None,

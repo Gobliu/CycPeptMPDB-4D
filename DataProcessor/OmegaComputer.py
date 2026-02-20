@@ -303,7 +303,7 @@ def omega_distribution_4d(env, env_suffix, pdb_dir, csv_path, bins=360, range_de
 
 if __name__ == "__main__":
     DATA_DIR_4D = DATA_DIR / "CycPeptMPDB_4D"
-    CSV_PATH = str(REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv")
+    CSV_PATH = str(REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv")
     ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
 
     # hist_total, bin_centers, bin_edges = omega_distribution_cremp()

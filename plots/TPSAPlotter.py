@@ -6,7 +6,7 @@ from pathlib import Path
 # --- Paths ---
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
-CSV_PATH = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
+CSV_PATH = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
 
 # --- Load data ---
 df = pd.read_csv(CSV_PATH)

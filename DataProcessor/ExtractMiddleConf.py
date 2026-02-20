@@ -194,7 +194,7 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
 def main():
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     REPO_ROOT = os.path.dirname(SCRIPT_DIR)
-    CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB-4D_clean.csv")
+    CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB-4D.csv")
     DATA_ROOT = os.path.join(os.path.dirname(REPO_ROOT), "Data", "CycPeptMPDB_4D")
     
     process_structures(CSV_PATH, DATA_ROOT, "Water")

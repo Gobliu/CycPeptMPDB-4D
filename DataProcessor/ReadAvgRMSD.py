@@ -142,8 +142,8 @@ if __name__ == "__main__":
     BASE_DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
     
     # Use the existing output as input to allow iterative updates
-    INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
-    OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
+    INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
+    OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
     
     # Process Water environment
     process_rmsd_data(

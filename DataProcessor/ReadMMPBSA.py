@@ -64,8 +64,8 @@ if __name__ == "__main__":
     SCRIPT_DIR = Path(__file__).resolve().parent
     REPO_ROOT = SCRIPT_DIR.parent
 
-    INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
-    OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
+    INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
+    OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
 
     MMPBSA_DAT = [str(REPO_ROOT / "csvs" / "hexa_fe_100frame")]
 

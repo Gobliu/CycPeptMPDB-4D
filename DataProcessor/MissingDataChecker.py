@@ -219,7 +219,7 @@ if __name__ == "__main__":
     SCRIPT_DIR = Path(__file__).resolve().parent
     REPO_ROOT = SCRIPT_DIR.parent
 
-    FINAL_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv"
+    FINAL_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
     DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
     OUTPUT_TXT = REPO_ROOT / "csvs" / "missing_data_audit.txt"
 

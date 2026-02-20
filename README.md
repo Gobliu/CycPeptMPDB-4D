@@ -50,7 +50,7 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 ```
 CycPeptMPDB-4D/                  (this repo)
 ├── csvs/                        CSV data files
-│   └── CycPeptMPDB-4D_clean.csv main dataset
+│   └── CycPeptMPDB-4D.csv       main dataset
 ├── DataProcessor/               data pipeline scripts
 │   ├── ReadAvgRMSD.py           extract RMSD from trajectories
 │   ├── ReadSA.py                extract surface area

@@ -9,6 +9,11 @@ import numpy as np
 import pandas as pd
 import torch
 
+# ── Paths ────────────────────────────────────────────────────────────────────
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+DATA_DIR = REPO_ROOT.parent / "Data"
+
 # ── Constants ────────────────────────────────────────────────────────────────
 
 COVALENT_RADII = {
@@ -192,8 +197,8 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
     log_name = str(REPO_ROOT / 'logs' / f'Irregular_Backbone_CREMP.txt')
     irregular = _init_irregular_log(log_name)
 
-    sdf_dir = '/media/liuwei/1T/sdf_and_json'
-    df = pd.read_csv('/media/liuwei/1T/summary_cycpeptmpdb.csv')
+    sdf_dir = str(DATA_DIR / 'sdf_and_json')
+    df = pd.read_csv(DATA_DIR / 'summary_cycpeptmpdb.csv')
 
     for _, row in df.iterrows():
         sdf_path = f"{sdf_dir}/{row.sequence}.sdf"
@@ -213,7 +218,7 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
             angle_list += torsion_angle(conf, backbone_set)
         bin_edges = _accumulate_histogram(hist_total, angle_list, bins, range_degrees)
 
-    _save_histogram(hist_total, bin_edges, 'omega_histogram_cremp.pt')
+    _save_histogram(hist_total, bin_edges, str(REPO_ROOT / 'pts' / 'omega_histogram_cremp.pt'))
     bin_centers = 0.5 * (bin_edges[:-1] + bin_edges[1:])
     return hist_total, bin_centers, bin_edges
 
@@ -225,8 +230,8 @@ def omega_distribution_cycpeptmpdb(bins=360, range_degrees=(0, 360)):
     irregular = _init_irregular_log(log_name)
 
     for env, suffix in [('water', '_H2O'), ('vacuum', ''), ('chloroform', '_CHCl3')]:
-        mol_dir = f'/media/liuwei/1T/3d_data_cycpeptmpdb/content/data/{env}'
-        df = pd.read_csv('../DataProcessor/CycPeptMPDB_Peptide_All.csv')
+        mol_dir = str(DATA_DIR / '3d_data_cycpeptmpdb' / 'content' / 'data' / env)
+        df = pd.read_csv(SCRIPT_DIR / 'CycPeptMPDB_Peptide_All.csv')
         for _, row in df.iterrows():
             mol_path = f"{mol_dir}/CycPeptMPDB_ID_{row.CycPeptMPDB_ID}{suffix}.mol"
             if mol_path in irregular or not os.path.exists(mol_path):
@@ -297,21 +302,19 @@ def omega_distribution_4d(env, env_suffix, pdb_dir, csv_path, bins=360, range_de
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    SCRIPT_DIR = Path(__file__).resolve().parent
-    REPO_ROOT = SCRIPT_DIR.parent
-    DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
+    DATA_DIR_4D = DATA_DIR / "CycPeptMPDB_4D"
     CSV_PATH = str(REPO_ROOT / "csvs" / "CycPeptMPDB-4D_clean.csv")
     ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
 
     # hist_total, bin_centers, bin_edges = omega_distribution_cremp()
-    hist_total, bin_centers, bin_edges = omega_distribution_cycpeptmpdb()
+    # hist_total, bin_centers, bin_edges = omega_distribution_cycpeptmpdb()
 
-    # for env, suffix in ENV_SUFFIX_MAP.items():
-    #     hist_total, bin_centers, bin_edges = omega_distribution_4d(
-    #         env, suffix,
-    #         str(DATA_DIR / env / "Structures"),
-    #         CSV_PATH,
-    #     )
+    for env, suffix in ENV_SUFFIX_MAP.items():
+        hist_total, bin_centers, bin_edges = omega_distribution_4d(
+            env, suffix,
+            str(DATA_DIR_4D / env / "Structures"),
+            CSV_PATH,
+        )
 
     # plt.figure(figsize=(8, 5))
     # plt.bar(bin_centers, hist_total, width=(bin_edges[1] - bin_edges[0]), align='center', edgecolor='k')

@@ -1,5 +1,11 @@
 import numpy as np
-from OmegaComputor import read_pdb
+from pathlib import Path
+from OmegaComputer import read_pdb
+
+# --- Paths ---
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+DATA_DIR = REPO_ROOT.parent / "Data"
 
 
 def noe_dict_checker(pdb_path, noe_list):
@@ -18,7 +24,7 @@ def noe_dict_checker(pdb_path, noe_list):
 
 
 if __name__ == '__main__':
-    pdb_path = '../../../Data/trjs/7l9d_100frames.pdb'
+    pdb_path = str(DATA_DIR / 'trjs' / '7l9d_100frames.pdb')
     noe_list = [[42, 46], [48, 33], [48, 67], [75, 79]]   # 7l9d
     # noe_list = [[4, 2], [4, 21], [2, 21], [23, 21], [42, 59], [42, 40], [40, 59], [61, 80], [61, 79],
     #             [112, 2], [112, 21]]    # 7l96

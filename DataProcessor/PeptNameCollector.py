@@ -1,6 +1,12 @@
 import os
 import pandas as pd
 import re
+from pathlib import Path
+
+# --- Paths ---
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+DATA_DIR = REPO_ROOT.parent / "Data"
 
 
 def normalize_name(original_name, source, verbose=False):
@@ -44,8 +50,8 @@ def get_log_path(row):
 
 # Step 1: Traverse subfolders and collect mapping
 log_dict = dict()  # (name, source) → full .log path
-# root_dir = '/home/liuwei/GitHub/Data/pdb_log/'
-root_dir = '/media/liuwei/1T/water/pdb_log'
+# root_dir = str(DATA_DIR / 'pdb_log')
+root_dir = str(DATA_DIR / 'water' / 'pdb_log')
 
 for dirpath, _, filenames in os.walk(root_dir):
     for fname in filenames:
@@ -62,7 +68,7 @@ for dirpath, _, filenames in os.walk(root_dir):
 log_entries = set(log_dict.keys())
 
 # Step 2: Load CSV and normalize
-csv_path = 'CycPeptMPDB_Peptide_All.csv'
+csv_path = str(SCRIPT_DIR / 'CycPeptMPDB_Peptide_All.csv')
 col_list = ['CycPeptMPDB_ID', 'Original_Name_in_Source_Literature', 'Source',
             'Structurally_Unique_ID', 'SMILES', 'PAMPA']
 df = pd.read_csv(csv_path, low_memory=False)[col_list]
@@ -77,7 +83,7 @@ df['log_path'] = df.apply(get_log_path, axis=1)
 df_filtered = df[df['log_path'].notnull()]
 
 # Step 4: Save
-df_filtered.to_csv('Peptide_with_pdb_water.csv', index=False)
+df_filtered.to_csv(SCRIPT_DIR / 'Peptide_with_pdb_water.csv', index=False)
 print(f"Saved {len(df_filtered)} matched rows to 'Peptide_with_pdb_water.csv'")
 
 # Step 5: Build the set of matched (name, source) keys

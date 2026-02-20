@@ -1,6 +1,12 @@
 import os
 import pandas as pd
+from pathlib import Path
 from sklearn.model_selection import train_test_split
+
+# --- Paths ---
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent
+DATA_DIR = REPO_ROOT.parent / "Data"
 
 
 def random_splitter(df, repeat_split=10):
@@ -23,7 +29,7 @@ def random_splitter(df, repeat_split=10):
         # Concatenate DataFrames6
         df = pd.concat([train_df, valid_df, test_df], ignore_index=True)
 
-    df.to_csv('Random_Split_With_PDB.csv', index=False)
+    df.to_csv(SCRIPT_DIR / 'Random_Split_With_PDB.csv', index=False)
 
 
 def df_prune(csv_path, pdb_dir):
@@ -39,5 +45,5 @@ def df_prune(csv_path, pdb_dir):
 
 
 if __name__ == '__main__':
-    df_ = df_prune(csv_path='Peptide_with_pdb.csv', pdb_dir='/home/liuwei/GitHub/Data/Hexene')
+    df_ = df_prune(csv_path=str(SCRIPT_DIR / 'Peptide_with_pdb.csv'), pdb_dir=str(DATA_DIR / 'Hexene'))
     random_splitter(df_)

@@ -351,13 +351,13 @@ def main():
     # Training
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch_size", type=int, default=32)
-    parser.add_argument("--lr", type=float, default=2e-4)
+    parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--weight_decay", type=float, default=1e-5)
     parser.add_argument("--num_workers", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--val_frac", type=float, default=0.1, help="Validation fraction")
     parser.add_argument("--test_frac", type=float, default=0.1, help="Test fraction")
-    parser.add_argument("--patience", type=int, default=20, help="Early stopping patience (0 to disable)")
+    parser.add_argument("--patience", type=int, default=50, help="Early stopping patience (0 to disable)")
     parser.add_argument("--save_dir", type=Path, default=REPO_ROOT / "checkpoints")
 
     args = parser.parse_args()

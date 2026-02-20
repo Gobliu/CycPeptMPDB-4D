@@ -69,12 +69,12 @@ CycPeptMPDB-4D/                  (this repo)
 ├── csvs/                        CSV data files
 │   └── CycPeptMPDB-4D.csv       main dataset
 ├── train_se3.py                 usage example: SE(3)-Transformer training
-├── DataProcessor/               scripts used to build the dataset (not needed for general use)
+├── dataprocessor/               scripts used to build the dataset (not needed for general use)
 ├── plots/                       scripts used to generate figures
 └── pts/                         precomputed dihedral histograms
 ```
 
-The `DataProcessor/` and `plots/` directories contain internal scripts used to
+The `dataprocessor/` and `plots/` directories contain internal scripts used to
 generate and validate the dataset. Most users only need `csvs/CycPeptMPDB-4D.csv`
 and the PDB files. See `train_se3.py` for a complete usage example.
 

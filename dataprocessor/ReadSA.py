@@ -2,7 +2,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from DataProcessor.utils import find_match_in_df
+from dataprocessor.utils import find_match_in_df
 
 
 def load_dat_file(dat_path: str) -> pd.DataFrame:

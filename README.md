@@ -45,28 +45,38 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 | `Water_3D_SASA`, `Water_3D_NPSA`, `Water_3D_PSA` | Solvent-accessible surface areas in water |
 | `Hexane_3D_SASA`, `Hexane_3D_NPSA`, `Hexane_3D_PSA` | Surface areas in hexane |
 
+## Setup
+
+Clone this repository and download the dataset into a sibling `Data/` folder:
+
+```
+parent_directory/
+├── CycPeptMPDB-4D/              ← this repo (git clone)
+└── Data/
+    └── CycPeptMPDB_4D/          ← downloaded dataset
+        ├── Water/
+        ├── Hexane/
+        └── ...
+```
+
+All scripts in this repo expect the dataset at `../Data/CycPeptMPDB_4D/`
+relative to the repository root.
+
 ## Repository structure
 
 ```
 CycPeptMPDB-4D/                  (this repo)
 ├── csvs/                        CSV data files
 │   └── CycPeptMPDB-4D.csv       main dataset
-├── DataProcessor/               data pipeline scripts
-│   ├── ReadAvgRMSD.py           extract RMSD from trajectories
-│   ├── ReadSA.py                extract surface area
-│   ├── ReadMMPBSA.py            extract MMPBSA energies
-│   ├── OmegaComputer.py         compute omega dihedral angles
-│   ├── MissingDataChecker.py    audit for missing data
-│   └── ...
-├── plots/                       plotting scripts
-│   ├── RMSDPlotter.py
-│   ├── TPSAPlotter.py
-│   ├── OmegaPlotter.py
-│   ├── NOEPlotter.py
-│   └── CoveragePlotter.py
-├── pts/                         precomputed dihedral histograms
-└── train_se3.py                 example: SE(3)-Transformer training
+├── train_se3.py                 usage example: SE(3)-Transformer training
+├── DataProcessor/               scripts used to build the dataset (not needed for general use)
+├── plots/                       scripts used to generate figures
+└── pts/                         precomputed dihedral histograms
 ```
+
+The `DataProcessor/` and `plots/` directories contain internal scripts used to
+generate and validate the dataset. Most users only need `csvs/CycPeptMPDB-4D.csv`
+and the PDB files. See `train_se3.py` for a complete usage example.
 
 ## Usage example: SE(3)-Transformer for PAMPA prediction
 

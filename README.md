@@ -6,7 +6,7 @@ adding MD-derived 3D conformations in two solvent environments (hexane and water
 for 5,160 cyclic peptides, along with computed molecular descriptors.
 
 - **Publication:** (Link to be added upon publication)
-- **Dataset:** (Link coming soon)
+- **Dataset:** [Zenodo](https://doi.org/10.5281/zenodo.18754430)
 
 ## Dataset overview
 
@@ -38,15 +38,25 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 
 | Column | Description |
 |---|---|
-| `CycPeptMPDB_ID` | Unique peptide identifier |
-| `Source` | Literature source |
-| `SMILES` | Molecular structure |
-| `PAMPA` | Log membrane permeability |
-| `Monomer_Length` | Number of residues |
-| `Water_avgRMSD_All`, `Water_avgRMSD_BackBone` | Average RMSD in water (all atoms / backbone) |
-| `Hexane_avgRMSD_All`, `Hexane_avgRMSD_BackBone` | Average RMSD in hexane |
-| `Water_3D_SASA`, `Water_3D_NPSA`, `Water_3D_PSA` | Solvent-accessible surface areas in water |
-| `Hexane_3D_SASA`, `Hexane_3D_NPSA`, `Hexane_3D_PSA` | Surface areas in hexane |
+| `CycPeptMPDB_ID` | Unique identifier from the original CycPeptMPDB |
+| `Source` | Reference literature for the peptide data |
+| `Original_Name_in_Source_Literature` | Original peptide designation in the source literature |
+| `Structurally_Unique_ID` | Identifier grouping structurally identical peptides across sources |
+| `PAMPA` | Experimental membrane permeability (log cm/s) |
+| `Monomer_Length` | Total number of monomers in the peptide |
+| `Monomer_Length_in_Main_Chain` | Monomers in the main-chain cycle (differs from `Monomer_Length` for lariat-shaped peptides) |
+| `Molecule_Shape` | Structural topology (e.g., Circle, Lariat) |
+| `Water_avgRMSD_All` | Average RMSD of all atoms in water (nm) |
+| `Water_avgRMSD_BackBone` | Average RMSD of backbone atoms in water (nm) |
+| `Hexane_avgRMSD_All` | Average RMSD of all atoms in hexane (nm) |
+| `Hexane_avgRMSD_BackBone` | Average RMSD of backbone atoms in hexane (nm) |
+| `Desolvation_Free_Energy` | Desolvation free energy via MMPBSA (kcal/mol) |
+| `Water_3D_SASA` | Solvent Accessible Surface Area in water (nm²) |
+| `Water_3D_PSA` | Polar Surface Area in water (nm²) |
+| `Water_3D_NPSA` | Non-Polar Surface Area in water (nm²) |
+| `Hexane_3D_SASA` | Solvent Accessible Surface Area in hexane (nm²) |
+| `Hexane_3D_PSA` | Polar Surface Area in hexane (nm²) |
+| `Hexane_3D_NPSA` | Non-Polar Surface Area in hexane (nm²) |
 
 ## Setup
 

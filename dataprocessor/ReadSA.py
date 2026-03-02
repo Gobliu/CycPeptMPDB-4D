@@ -1,7 +1,9 @@
+import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from dataprocessor.utils import find_match_in_df
 
 
@@ -56,11 +58,19 @@ def process_sa_data(
             match_mask, skip = find_match_in_df(alias, all_df)
             if skip:
                 continue
-            print(f"Processing alias: {alias}, matches found: {match_mask.sum()}")
             ref_idx = all_df.index[match_mask][0]
             for feat in feature_names:
                 col = f'{env}_{feat}'
                 val = sa_df.loc[sa_df['alias'] == alias, feat].values[0]
+                existing = all_df.at[ref_idx, col]
+                # if int(all_df.at[ref_idx, 'CycPeptMPDB_ID']) in [1585, 1587, 1599, 1603]:
+                #     print(all_df.at[ref_idx, 'CycPeptMPDB_ID'])
+                #     print(f"Updating {env} {col} for alias '{alias}' (row {ref_idx}): {existing} -> {val}")
+                if pd.notna(existing) and not np.isclose(existing, val):
+                    print(
+                        f"  [CONFLICT] {env} {col} for alias '{alias}' "
+                        f"(row {ref_idx}): existing={existing}, new={val}"
+                    )
                 all_df.at[ref_idx, col] = val
     # Save updated CSV
     out_p = Path(output_path)
@@ -80,7 +90,7 @@ if __name__ == "__main__":
         str(REPO_ROOT / "csvs" / "hepta-hexane_sa"),
     ]
     WATER_DAT = [
-        str(REPO_ROOT / "csvs" / "hexa-water_sa"),
+        str(REPO_ROOT / "csvs" / "all_water_sa_bad.dat"),
         str(REPO_ROOT / "csvs" / "hepta-water_sa"),
     ]
 

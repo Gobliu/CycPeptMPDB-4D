@@ -53,7 +53,7 @@ def process_rmsd_data(
     """
     Updates RMSD values in the metadata CSV for a specific environment (e.g., Water or Hexane).
     Uses Title Case for column names (e.g., Water_avgRMSD_all).
-    If columns exist, only updates NaN values.
+    Always overwrites with new value; prints [CONFLICT] if existing value differs.
     """
     # 1. Path setup and verification using pathlib
     csv_p = Path(csv_path)
@@ -71,8 +71,8 @@ def process_rmsd_data(
     df: pd.DataFrame = pd.read_csv(csv_path, low_memory=False)
     
     # Define column names with Title Case
-    col_all = f'{env_title}_avgRMSD_all'
-    col_bb = f'{env_title}_avgRMSD_bb'
+    col_all = f'{env_title}_avgRMSD_All'
+    col_bb = f'{env_title}_avgRMSD_BackBone'
     
     # Initialize columns only if they don't exist
     if col_all not in df.columns:
@@ -86,44 +86,49 @@ def process_rmsd_data(
         col_bb: {"pre_existing": df[col_bb].notna().sum(), "newly_filled": 0}
     }
 
-    # 3. Iterate and fill values ONLY if they are NaN
+    # 3. Iterate and update values, reporting conflicts
     for idx, row in df.iterrows():
         source = str(row['Source']).strip()
         cp_id = str(row['CycPeptMPDB_ID']).strip()
         file_prefix = f"{source}_{cp_id}"
 
-        # Update 'all' atoms column if NaN
-        if pd.isna(row[col_all]):
-            path_all = find_file_with_pattern(tgt_dir, file_prefix, "_avgRMSD_all.xvg")
-            if path_all:
-                val = read_first_value(path_all)
-                if not pd.isna(val):
-                    df.at[idx, col_all] = val
+        # Update 'all' atoms column
+        path_all = find_file_with_pattern(tgt_dir, file_prefix, "_avgRMSD_all.xvg")
+        if path_all:
+            val = read_first_value(path_all)
+            if not pd.isna(val):
+                existing = df.at[idx, col_all]
+                if pd.notna(existing) and not np.isclose(existing, val):
+                    print(
+                        f"  [CONFLICT] {col_all} for {file_prefix} "
+                        f"(row {idx}): existing={existing}, new={val}"
+                    )
+                if pd.isna(existing):
                     stats[col_all]["newly_filled"] += 1
+                df.at[idx, col_all] = val
 
-        # Update 'backbone' column if NaN
-        if pd.isna(row[col_bb]):
-            path_bb = find_file_with_pattern(tgt_dir, file_prefix, "_avgRMSD_bb.xvg")
-            if path_bb:
-                val = read_first_value(path_bb)
-                if not pd.isna(val):
-                    df.at[idx, col_bb] = val
+        # Update 'backbone' column
+        path_bb = find_file_with_pattern(tgt_dir, file_prefix, "_avgRMSD_bb.xvg")
+        if path_bb:
+            val = read_first_value(path_bb)
+            if not pd.isna(val):
+                existing = df.at[idx, col_bb]
+                if pd.notna(existing) and not np.isclose(existing, val):
+                    print(
+                        f"  [CONFLICT] {col_bb} for {file_prefix} "
+                        f"(row {idx}): existing={existing}, new={val}"
+                    )
+                if pd.isna(existing):
                     stats[col_bb]["newly_filled"] += 1
+                df.at[idx, col_bb] = val
 
-    # 4. Filter columns: Keep only Source, CycPeptMPDB_ID, and columns containing 'rmsd'
-    keep_cols = [
-        col for col in df.columns 
-        if col in ['Source', 'CycPeptMPDB_ID'] or 'rmsd' in col.lower()
-    ]
-    df_filtered = df[keep_cols].copy()
+    # 4. Save results
+    df.to_csv(out_p, index=False)
 
-    # 5. Save results
-    df_filtered.to_csv(out_p, index=False)
-    
-    # 6. Final Summary
-    total_rows = len(df_filtered)
-    still_missing_all = df_filtered[col_all].isna().sum()
-    still_missing_bb = df_filtered[col_bb].isna().sum()
+    # 5. Final Summary
+    total_rows = len(df)
+    still_missing_all = df[col_all].isna().sum()
+    still_missing_bb = df[col_bb].isna().sum()
 
     print(f"\nProcessing Complete for environment: {env_title}")
     print(f"Output saved to: {out_p}")
@@ -149,6 +154,6 @@ if __name__ == "__main__":
     process_rmsd_data(
         csv_path=str(INPUT_CSV), 
         base_data_dir=str(BASE_DATA_DIR), 
-        env="Hexane",
+        env="Water",
         output_path=str(OUTPUT_CSV)
     )

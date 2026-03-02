@@ -100,9 +100,14 @@ that predicts PAMPA permeability from 3D structures.
 ### Prerequisites
 
 ```bash
-pip install dgl -f https://data.dgl.ai/wheels/cu121/repo.html
-pip install e3nn==0.3.3 biopython
+# 1. Create and activate the conda environment (Python 3.11 + PyTorch 2.4.1 + CUDA 12.4)
+conda env create -f environment.yml
+conda activate cycpeptmpdb-4d
 
+# 2. Install DGL (must use the torch-2.4/cu124 wheel repo to match PyTorch + CUDA versions)
+pip install dgl -f https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html
+
+# 3. Install the NVIDIA SE3-Transformer
 git clone --depth 1 https://github.com/NVIDIA/DeepLearningExamples.git /tmp/DeepLearningExamples
 pip install -e /tmp/DeepLearningExamples/DGLPyTorch/DrugDiscovery/SE3Transformer
 ```

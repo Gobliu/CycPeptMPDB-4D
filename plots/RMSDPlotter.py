@@ -44,8 +44,8 @@ env_dashes = {'Hexane': (1, 0), 'Water': (4, 2)}  # solid vs dashed
 
 # --- Create figure ---
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-metrics = [('avgRMSD_all', 'All atoms', (0, 3.5)),
-           ('avgRMSD_bb', 'Main-chain heavy atoms', (0, 2.5))]
+metrics = [('avgRMSD_all', 'All heavy atoms', (0, 3.5)),
+           ('avgRMSD_bb', 'Backbone heavy atoms', (0, 2.5))]
 
 for ax, (metric, title, xlim) in zip(axes, metrics):
     sub = df.dropna(subset=[metric, 'Monomer_Length'])
@@ -70,6 +70,10 @@ for ax, (metric, title, xlim) in zip(axes, metrics):
     ax.grid(alpha=0.3)
     ax.tick_params(axis='both', labelsize=15, width=2, direction='in', pad=2)
 
+    # Hide the first (origin) tick label on both axes to avoid overlap
+    ax.get_xticklabels()[0].set_visible(False)
+    ax.get_yticklabels()[0].set_visible(False)
+
     for spine in ax.spines.values():
         spine.set_linewidth(1.5)
         spine.set_edgecolor('black')
@@ -82,4 +86,5 @@ axes[1].set_ylabel('')
 axes[1].legend(frameon=False, ncol=1, loc='upper right', fontsize=14)
 
 plt.tight_layout()
+fig.savefig(SCRIPT_DIR / "RMSDPlotter.png", dpi=300, bbox_inches='tight')
 plt.show()

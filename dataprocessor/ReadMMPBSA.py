@@ -1,7 +1,9 @@
+import sys
 from pathlib import Path
 import numpy as np
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from dataprocessor.utils import find_match_in_df
 
 
@@ -49,9 +51,14 @@ def process_mmpbsa_data(
         match_mask, skip = find_match_in_df(alias, all_df)
         if skip:
             continue
-        print(f"Processing alias: {alias}, matches found: {match_mask.sum()}")
         ref_idx = all_df.index[match_mask][0]
         val = sa_df.loc[sa_df['alias'] == alias, 'Desolvation_Free_Energy'].values[0]
+        existing = all_df.at[ref_idx, col_name]
+        if pd.notna(existing) and not np.isclose(existing, val):
+            print(
+                f"  [CONFLICT] {col_name} for alias '{alias}' "
+                f"(row {ref_idx}): existing={existing}, new={val}"
+            )
         all_df.at[ref_idx, col_name] = val
 
     # Save updated CSV
@@ -67,7 +74,7 @@ if __name__ == "__main__":
     INPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
     OUTPUT_CSV = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
 
-    MMPBSA_DAT = [str(REPO_ROOT / "csvs" / "hexa_fe_100frame")]
+    MMPBSA_DAT = [str(REPO_ROOT / "csvs" / "all_water_mmpbsa.dat")]
 
     process_mmpbsa_data(
         csv_path=str(INPUT_CSV),

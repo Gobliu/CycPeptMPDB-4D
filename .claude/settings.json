@@ -1,10 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Bash(xxd:*)"
+      "Bash(xxd:*)",
+      "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/pip install dgl -f https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html)",
+      "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/pip install --force-reinstall --no-deps dgl -f https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html)",
+      "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/python -c \":*)"
     ],
     "additionalDirectories": [
-      "/home/liuw/GitHub/CycPeptMPDB-4D/csvs"
+      "/home/liuw/GitHub/CycPeptMPDB-4D/csvs",
+      "/tmp/DeepLearningExamples_test"
     ]
   }
 }

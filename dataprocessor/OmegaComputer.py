@@ -137,15 +137,23 @@ def find_backbone_cycle(graph, atom_types, residue_len, n_extra=0, max_cycles=50
     if not tgt_cycles:
         return []
 
-    omega_atom_set = []
+    # Collect patterns, deduplicating by the N atom index (atom 2 in CA-CO-N-CA).
+    # Multiple simple cycles of the same length can share backbone atoms when
+    # side-chain rings create alternative paths, causing the same peptide bond
+    # to appear more than once.
+    seen_n = {}
     for c in tgt_cycles:
         for i in range(len(c)):
             names = [_classify_atom(graph, atom_types, c[(i + k) % loop_len]) for k in range(4)]
-            if names == ['CA', 'N', 'CO', 'CA']:
-                omega_atom_set.append([c[(i + k) % loop_len] for k in range(4)])
+            if names == ['CA', 'CO', 'N', 'CA']:
+                atom_set = [c[(i + k) % loop_len] for k in range(4)]
+                n_idx = atom_set[2]
+                if n_idx not in seen_n:
+                    seen_n[n_idx] = atom_set
+    omega_atom_set = list(seen_n.values())
 
     assert len(omega_atom_set) > 0, 'No omega atom set found'
-    assert len(omega_atom_set) <= residue_len, 'Incorrect number of omega atom set'
+    assert len(omega_atom_set) <= residue_len, f'Incorrect number of omega atom set: {len(omega_atom_set)} > {residue_len}'
     return omega_atom_set
 
 
@@ -159,12 +167,18 @@ def torsion_angle(conf, atom_sets):
         p2 = np.asarray(conf[a2][:3], dtype=float)
         p3 = np.asarray(conf[a3][:3], dtype=float)
 
-        b0, b1, b2 = p1 - p0, p2 - p1, p3 - p2
-        n0 = np.cross(b0, b1); n0 /= np.linalg.norm(n0)
-        n1 = np.cross(b1, b2); n1 /= np.linalg.norm(n1)
-        b2 /= np.linalg.norm(b2)
+        # atom_set order is [CA(i), C(i), N(i+1), CA(i+1)], so:
+        #   p0=CA(i), p1=C(i), p2=N(i+1), p3=CA(i+1)
+        v01 = p1 - p0  # CA(i)   -> C(i)
+        v12 = p2 - p1  # C(i)    -> N(i+1)   [the peptide bond axis]
+        v23 = p3 - p2  # N(i+1)  -> CA(i+1)
+        # Normals to each successive plane
+        n_012 = np.cross(v01, v12)  # plane of CA(i)-C(i)-N(i+1)
+        n_123 = np.cross(v12, v23)  # plane of C(i)-N(i+1)-CA(i+1)
+        v12_hat = v12 / np.linalg.norm(v12)  # unit vector along C(i)->N(i+1)
 
-        angle = np.degrees(np.arctan2(np.dot(np.cross(n0, b2), n1), np.dot(n0, n1))) % 360
+        # Praxitelous/Blondel formula: atan2((n_012 x v12_hat)·n_123, n_012·n_123)
+        angle = np.degrees(np.arctan2(np.dot(np.cross(n_012, v12_hat), n_123), np.dot(n_012, n_123))) % 360
         angles.append(angle)
     return angles
 
@@ -198,7 +212,7 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
     irregular = _init_irregular_log(log_name)
 
     sdf_dir = str(DATA_DIR / 'sdf_and_json')
-    df = pd.read_csv(DATA_DIR / 'summary_cycpeptmpdb.csv')
+    df = pd.read_csv(REPO_ROOT / "csvs" / 'summary_cycpeptmpdb.csv', low_memory=False)
 
     for _, row in df.iterrows():
         sdf_path = f"{sdf_dir}/{row.sequence}.sdf"
@@ -229,18 +243,30 @@ def omega_distribution_cycpeptmpdb(bins=360, range_degrees=(0, 360)):
     log_name = str(REPO_ROOT / 'logs' / f'Irregular_Backbone_CycPeptMPDB.txt')
     irregular = _init_irregular_log(log_name)
 
+    missing_count = 0
+    irregular_count = 0
     for env, suffix in [('water', '_H2O'), ('vacuum', ''), ('chloroform', '_CHCl3')]:
-        mol_dir = str(DATA_DIR / '3d_data_cycpeptmpdb' / 'content' / 'data' / env)
-        df = pd.read_csv(SCRIPT_DIR / 'CycPeptMPDB_Peptide_All.csv')
+        mol_dir = str(DATA_DIR / 'cycpeptmpdb_3d' / 'content' / 'data' / env)
+        df = pd.read_csv(REPO_ROOT / "csvs" / 'CycPeptMPDB_Peptide_All.csv', low_memory=False)
         for _, row in df.iterrows():
             mol_path = f"{mol_dir}/CycPeptMPDB_ID_{row.CycPeptMPDB_ID}{suffix}.mol"
-            if mol_path in irregular or not os.path.exists(mol_path):
+            if not os.path.exists(mol_path):
+                missing_count += 1
+                print(f"[missing    #{missing_count}] {mol_path}")
+                continue
+            if mol_path in irregular:
                 continue
             c_list = read_sdf(mol_path)
             bonds, atom_types = infer_bonds(c_list[0])
             graph = build_graph(atom_types, bonds)
-            backbone_set = find_backbone_cycle(graph, atom_types, residue_len=row.Monomer_Length)
+            # 'ac-' (N-acetyl cap) replaces one backbone N with CH3-CO-, shrinking the
+            # backbone ring by 1 atom. Pass n_extra=-1 to adjust loop_len accordingly.
+            has_ac = "'ac-'" in str(row.get('Sequence', ''))
+            n_extra = -1 if has_ac else 0
+            backbone_set = find_backbone_cycle(graph, atom_types, residue_len=row.Monomer_Length, n_extra=n_extra)
             if not backbone_set:
+                irregular_count += 1
+                print(f"[irregular  #{irregular_count}] {mol_path}")
                 with open(log_name, 'a') as f:
                     f.write(f'{mol_path}\n')
                 continue
@@ -250,6 +276,8 @@ def omega_distribution_cycpeptmpdb(bins=360, range_degrees=(0, 360)):
                 angle_list += torsion_angle(conf, backbone_set)
             bin_edges = _accumulate_histogram(hist_total, angle_list, bins, range_degrees)
 
+    print(f"Missing files:   {missing_count}")
+    print(f"Irregular backbone (no cycle found): {irregular_count}")
     bin_centers = 0.5 * (bin_edges[:-1] + bin_edges[1:])
     return hist_total, bin_centers, bin_edges
 
@@ -299,6 +327,75 @@ def omega_distribution_4d(env, env_suffix, pdb_dir, csv_path, bins=360, range_de
     return hist_total, bin_centers, bin_edges
 
 
+# ── Test / inspection helper ─────────────────────────────────────────────────
+
+def inspect_pdb_omegas(pdb_path, residue_len, n_extra=None):
+    """Print residue name + omega angle for each backbone peptide bond in MODEL 0.
+
+    Each omega is labelled by the residue that owns the N atom in the
+    CA→N→CO→CA dihedral (i.e. the acceptor residue of the peptide bond).
+
+    Usage::
+        inspect_pdb_omegas("path/to/peptide.pdb", residue_len=6)
+    """
+    pdb_path = str(pdb_path)
+
+    # Parse atom metadata from first MODEL only
+    atom_meta = []   # list of (res_num, res_name, atom_name, x, y, z, element)
+    with open(pdb_path) as f:
+        in_first_model = False
+        past_first_model = False
+        for line in f:
+            if line.startswith('MODEL'):
+                if in_first_model:
+                    past_first_model = True
+                    break
+                in_first_model = True
+                continue
+            if past_first_model:
+                break
+            if line.startswith('ENDMDL'):
+                break
+            if not line.startswith(('ATOM', 'HETATM')):
+                continue
+            res_name = line[17:20].strip()
+            res_num  = int(line[22:26])
+            atom_name = line[12:16].strip()
+            x, y, z  = float(line[30:38]), float(line[38:46]), float(line[46:54])
+            element  = line[76:78].strip() or atom_name[0]
+            atom_meta.append((res_num, res_name, atom_name, x, y, z, element))
+
+    # Build conf and atom_types for the existing helpers
+    conf       = [[m[3], m[4], m[5], m[6]] for m in atom_meta]
+    atom_types = [m[6] for m in atom_meta]
+
+    if n_extra is None:
+        # Auto-count from residue names in this PDB
+        seen = {}
+        for res_num, res_name, *_ in atom_meta:
+            seen[res_num] = res_name
+        n_extra = sum(1 for name in seen.values() if name in ('BHF', 'TNH'))
+
+    bonds = infer_bonds(conf)[0]
+    graph = build_graph(atom_types, bonds)
+    omega_sets = find_backbone_cycle(graph, atom_types, residue_len, n_extra)
+
+    if not omega_sets:
+        print("No backbone cycle found.")
+        return
+
+    angles = torsion_angle(conf, omega_sets)
+
+    # omega dihedral atom order: CA(i)→C(i)→N(i+1)→CA(i+1)  [IUPAC order]
+    # atom index 2 in each set is N(i+1) — use its residue as the label
+    print(f"{'#':<4}  {'Res':>4}  {'ResName':<8}  {'omega (deg)':>12}")
+    print("-" * 36)
+    for k, (atom_set, angle) in enumerate(zip(omega_sets, angles), 1):
+        n_idx = atom_set[2]
+        res_num, res_name = atom_meta[n_idx][0], atom_meta[n_idx][1]
+        print(f"{k:<4}  {res_num:>4}  {res_name:<8}  {angle:>12.2f}")
+
+
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
@@ -306,15 +403,15 @@ if __name__ == "__main__":
     CSV_PATH = str(REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv")
     ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
 
-    # hist_total, bin_centers, bin_edges = omega_distribution_cremp()
+    hist_total, bin_centers, bin_edges = omega_distribution_cremp()
     # hist_total, bin_centers, bin_edges = omega_distribution_cycpeptmpdb()
 
-    for env, suffix in ENV_SUFFIX_MAP.items():
-        hist_total, bin_centers, bin_edges = omega_distribution_4d(
-            env, suffix,
-            str(DATA_DIR_4D / env / "Structures"),
-            CSV_PATH,
-        )
+    # for env, suffix in ENV_SUFFIX_MAP.items():
+    #     hist_total, bin_centers, bin_edges = omega_distribution_4d(
+    #         env, suffix,
+    #         str(DATA_DIR_4D / env / "Structures"),
+    #         CSV_PATH,
+    #     )
 
     # plt.figure(figsize=(8, 5))
     # plt.bar(bin_centers, hist_total, width=(bin_edges[1] - bin_edges[0]), align='center', edgecolor='k')
@@ -324,3 +421,5 @@ if __name__ == "__main__":
     # plt.grid(True, linestyle='--', alpha=0.6)
     # plt.tight_layout()
     # plt.show()
+
+    # inspect_pdb_omegas(DATA_DIR_4D / "Water" / "Structures" / "2015_Wang_1048_H2O_Str.pdb", residue_len=6)

@@ -119,19 +119,19 @@ if __name__ == '__main__':
     CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB_Peptide_5publications.csv")
     
     # 1. Process Water Logs
-    # check_exist_rename_move(
-    #     csv_path=CSV_PATH,
-    #     source_dir=os.path.join(DATA_PATH, "Water", "pdb_log_20.3-50ns"),
-    #     target_dir=os.path.join(DATA_PATH, "Water", "Logs"),
-    #     env="Water",
-    #     mode="log"
-    # )
-
-    # 2. Process Hexane Trajectories
     check_exist_rename_move(
         csv_path=CSV_PATH,
-        source_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
-        target_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
-        env="Hexane",
+        source_dir=os.path.join(DATA_PATH, "Water", "pdb_log_20.3-50ns"),
+        target_dir=os.path.join(DATA_PATH, "Water", "Logs"),
+        env="Water",
         mode="log"
     )
+
+    # 2. Process Hexane Trajectories
+    # check_exist_rename_move(
+    #     csv_path=CSV_PATH,
+    #     source_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
+    #     target_dir=os.path.join(DATA_PATH, "Hexane", "Logs"),
+    #     env="Hexane",
+    #     mode="log"
+    # )

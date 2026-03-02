@@ -1,0 +1,23 @@
+name: cycpeptmpdb-4d
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.11
+  # Core ML/Scientific
+  - pytorch=2.4.1
+  - pytorch-cuda=12.4
+  - numpy
+  - pandas
+  - scipy
+  # BioPython for PDB parsing
+  - biopython
+  # Pip-only packages
+  - pip
+  - pip:
+    # e3nn — pinned to 0.3.3 as required by NVIDIA SE3Transformer
+    - e3nn==0.3.3
+    # torchdata — pinned to 0.9.0 (last version with datapipes, required by DGL)
+    - torchdata==0.9.0
+    - pydantic

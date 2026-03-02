@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 text = r"""
 CycPeptMPDB-4D/
 │
-├── Water/                      (5,152 peptides)
+├── Water/                      (5,160 peptides)
 │   ├── Trajectories/           *.pdb trajectories (100 frames each)
 │   │   ├── XXX_YYY_H2O_Traj.pdb
 │   │   └── ...
@@ -13,7 +13,7 @@ CycPeptMPDB-4D/
 │   └── Logs/                   clustering logs
 │       ├── XXX_YYY_H2O.log
 │       └── ...
-├── Hexane/                     (5,152 peptides)
+├── Hexane/                     (5,160 peptides)
 │   ├── Trajectories/
 │   │   ├── XXX_YYY_Hexane_Traj.pdb
 │   │   └── ...

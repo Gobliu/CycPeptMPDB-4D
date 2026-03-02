@@ -8,6 +8,7 @@ dependencies:
   # Core ML/Scientific
   - pytorch=2.4.1
   - pytorch-cuda=12.4
+  - dglteam/label/th24_cu124::dgl
   - numpy
   - pandas
   - scipy

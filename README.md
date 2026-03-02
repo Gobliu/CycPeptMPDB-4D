@@ -46,10 +46,10 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 | `Monomer_Length` | Total number of monomers in the peptide |
 | `Monomer_Length_in_Main_Chain` | Monomers in the main-chain cycle (differs from `Monomer_Length` for lariat-shaped peptides) |
 | `Molecule_Shape` | Structural topology (e.g., Circle, Lariat) |
-| `Water_avgRMSD_All` | Average RMSD of all atoms in water (nm) |
-| `Water_avgRMSD_BackBone` | Average RMSD of backbone atoms in water (nm) |
-| `Hexane_avgRMSD_All` | Average RMSD of all atoms in hexane (nm) |
-| `Hexane_avgRMSD_BackBone` | Average RMSD of backbone atoms in hexane (nm) |
+| `Water_avgRMSD_All` | Average RMSD of all heavy atoms in water (nm) |
+| `Water_avgRMSD_BackBone` | Average RMSD of backbone heavy atoms in water (nm) |
+| `Hexane_avgRMSD_All` | Average RMSD of all heavy atoms in hexane (nm) |
+| `Hexane_avgRMSD_BackBone` | Average RMSD of backbone heavy atoms in hexane (nm) |
 | `Desolvation_Free_Energy` | Desolvation free energy via MMPBSA (kcal/mol) |
 | `Water_3D_SASA` | Solvent Accessible Surface Area in water (nm²) |
 | `Water_3D_PSA` | Polar Surface Area in water (nm²) |

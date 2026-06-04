@@ -1,0 +1,111 @@
+!!index array str
+ "MAL"
+!entry.MAL.unit.atoms table  str name  str type  int typex  int resx  int flags  int seq  int elmnt  dbl chg
+ "N" "N" 0 1 131072 1 7 -0.748466
+ "CM" "CT" 0 1 131072 2 6 0.156651
+ "HM1" "H1" 0 1 131072 3 1 0.043580
+ "HM2" "H1" 0 1 131072 4 1 0.043580
+ "HM3" "H1" 0 1 131072 5 1 0.043580
+ "CA" "CT" 0 1 131072 6 6 0.111739
+ "CB" "CT" 0 1 131072 7 6 -0.095813
+ "HB1" "HC" 0 1 131072 8 1 0.057255
+ "HB2" "HC" 0 1 131072 9 1 0.057255
+ "HB3" "HC" 0 1 131072 10 1 0.057255
+ "HA" "H1" 0 1 131072 11 1 0.030985
+ "C" "C" 0 1 131072 12 6 0.669463
+ "O" "O" 0 1 131072 13 8 -0.427064
+!entry.MAL.unit.atomspertinfo table  str pname  str ptype  int ptypex  int pelmnt  dbl pchg
+ "N" "N" 0 -1 0.0
+ "CM" "CT" 0 -1 0.0
+ "HM1" "H1" 0 -1 0.0
+ "HM2" "H1" 0 -1 0.0
+ "HM3" "H1" 0 -1 0.0
+ "CA" "CT" 0 -1 0.0
+ "CB" "CT" 0 -1 0.0
+ "HB1" "HC" 0 -1 0.0
+ "HB2" "HC" 0 -1 0.0
+ "HB3" "HC" 0 -1 0.0
+ "HA" "H1" 0 -1 0.0
+ "C" "C" 0 -1 0.0
+ "O" "O" 0 -1 0.0
+!entry.MAL.unit.boundbox array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.MAL.unit.childsequence single int
+ 2
+!entry.MAL.unit.connect array int
+ 1
+ 12
+!entry.MAL.unit.connectivity table  int atom1x  int atom2x  int flags
+ 1 2 1
+ 1 6 1
+ 2 3 1
+ 2 4 1
+ 2 5 1
+ 6 7 1
+ 6 11 1
+ 6 12 1
+ 7 8 1
+ 7 9 1
+ 7 10 1
+ 12 13 1
+!entry.MAL.unit.hierarchy table  str abovetype  int abovex  str belowtype  int belowx
+ "U" 0 "R" 1
+ "R" 1 "A" 1
+ "R" 1 "A" 2
+ "R" 1 "A" 3
+ "R" 1 "A" 4
+ "R" 1 "A" 5
+ "R" 1 "A" 6
+ "R" 1 "A" 7
+ "R" 1 "A" 8
+ "R" 1 "A" 9
+ "R" 1 "A" 10
+ "R" 1 "A" 11
+ "R" 1 "A" 12
+ "R" 1 "A" 13
+!entry.MAL.unit.name single str
+ "MAL"
+!entry.MAL.unit.positions table  dbl x  dbl y  dbl z
+ 3.540003 1.419779 1.933042E-06
+ 4.919664 1.824637 0.489885
+ 5.050608 1.494765 1.520486
+ 5.018728 2.909019 0.440865
+ 5.679516 1.361697 -0.137995
+ 3.428066 1.886629 -1.374573
+ 1.987831 1.553636 -1.850649
+ 1.276665 2.103819 -1.234498
+ 1.880856 1.858623 -2.891629
+ 1.806796 0.482719 -1.758655
+ 4.154339 1.366406 -2.000813
+ 3.617163 3.400994 -1.508610
+ 3.834153 4.043923 -0.482716
+!entry.MAL.unit.residueconnect table  int c1x  int c2x  int c3x  int c4x  int c5x  int c6x
+ 1 12 0 0 0 0
+!entry.MAL.unit.residues table  str name  int seq  int childseq  int startatomx  str restype  int imagingx
+ "MAL" 1 14 1 "?" 0
+!entry.MAL.unit.residuesPdbSequenceNumber array int
+ 0
+!entry.MAL.unit.solventcap array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.MAL.unit.velocities table  dbl x  dbl y  dbl z
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0

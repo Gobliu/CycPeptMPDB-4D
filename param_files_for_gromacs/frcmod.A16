@@ -1,0 +1,22 @@
+Remark line goes here
+MASS
+
+BOND
+
+ANGLE
+C -CT-N   80.000     111.200   same as C -CT-N3, penalty score=  0.1
+CA-CA-NC   70.000     121.500   same as CM-CA-NC, penalty score=  1.1
+CA-NC-CA   70.000     118.600   same as CA-NC-CQ, penalty score=  0.3
+H4-CA-NC   50.000     119.100   same as H4-CM-N*, penalty score= 19.5
+
+DIHE
+
+IMPROPER
+CA-CT-CA-CT         1.1          180.0         2.0          Using the default value
+CT-H4-CA-NC         1.1          180.0         2.0          Using the default value
+CA-CT-CA-HA         1.1          180.0         2.0          Using the default value
+
+NONBON
+
+
+

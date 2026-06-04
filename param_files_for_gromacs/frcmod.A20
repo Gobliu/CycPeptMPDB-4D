@@ -1,0 +1,18 @@
+Remark line goes here
+MASS
+
+BOND
+
+ANGLE
+C -CT-N   80.000     111.200   same as C -CT-N3, penalty score=  0.1
+
+DIHE
+
+IMPROPER
+C -CT-N -CT         1.1          180.0         2.0          Using the default value
+CT-N -C -O         10.5          180.0         2.0          Using general improper torsional angle  X- X- C- O, penalty score=  6.0)
+
+NONBON
+
+
+

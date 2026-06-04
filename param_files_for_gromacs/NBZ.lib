@@ -1,0 +1,154 @@
+!!index array str
+ "NBZ"
+!entry.NBZ.unit.atoms table  str name  str type  int typex  int resx  int flags  int seq  int elmnt  dbl chg
+ "N" "N" 0 1 131072 1 7 -0.755521
+ "CB" "CT" 0 1 131072 2 6 0.217515
+ "C7" "CA" 0 1 131072 3 6 -0.103623
+ "C17" "CA" 0 1 131072 4 6 -0.112267
+ "C18" "CA" 0 1 131072 5 6 -0.123070
+ "C19" "CA" 0 1 131072 6 6 -0.117434
+ "C20" "CA" 0 1 131072 7 6 -0.123070
+ "C21" "CA" 0 1 131072 8 6 -0.112267
+ "H21" "HA" 0 1 131072 9 1 0.153777
+ "H20" "HA" 0 1 131072 10 1 0.141051
+ "H19" "HA" 0 1 131072 11 1 0.138930
+ "H18" "HA" 0 1 131072 12 1 0.141051
+ "H17" "HA" 0 1 131072 13 1 0.153777
+ "HB1" "H1" 0 1 131072 14 1 0.051648
+ "HB2" "H1" 0 1 131072 15 1 0.051648
+ "CA" "CT" 0 1 131072 16 6 0.085691
+ "HA" "H1" 0 1 131072 17 1 0.083464
+ "HA2" "H1" 0 1 131072 18 1 0.083464
+ "C" "C" 0 1 131072 19 6 0.613093
+ "O" "O" 0 1 131072 20 8 -0.467855
+!entry.NBZ.unit.atomspertinfo table  str pname  str ptype  int ptypex  int pelmnt  dbl pchg
+ "N" "N" 0 -1 0.0
+ "CB" "CT" 0 -1 0.0
+ "C7" "CA" 0 -1 0.0
+ "C17" "CA" 0 -1 0.0
+ "C18" "CA" 0 -1 0.0
+ "C19" "CA" 0 -1 0.0
+ "C20" "CA" 0 -1 0.0
+ "C21" "CA" 0 -1 0.0
+ "H21" "HA" 0 -1 0.0
+ "H20" "HA" 0 -1 0.0
+ "H19" "HA" 0 -1 0.0
+ "H18" "HA" 0 -1 0.0
+ "H17" "HA" 0 -1 0.0
+ "HB1" "H1" 0 -1 0.0
+ "HB2" "H1" 0 -1 0.0
+ "CA" "CT" 0 -1 0.0
+ "HA" "H1" 0 -1 0.0
+ "HA2" "H1" 0 -1 0.0
+ "C" "C" 0 -1 0.0
+ "O" "O" 0 -1 0.0
+!entry.NBZ.unit.boundbox array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.NBZ.unit.childsequence single int
+ 2
+!entry.NBZ.unit.connect array int
+ 1
+ 19
+!entry.NBZ.unit.connectivity table  int atom1x  int atom2x  int flags
+ 1 2 1
+ 1 16 1
+ 2 3 1
+ 2 14 1
+ 2 15 1
+ 3 4 1
+ 3 8 1
+ 4 5 1
+ 4 13 1
+ 5 6 1
+ 5 12 1
+ 6 7 1
+ 6 11 1
+ 7 8 1
+ 7 10 1
+ 8 9 1
+ 16 17 1
+ 16 18 1
+ 16 19 1
+ 19 20 1
+!entry.NBZ.unit.hierarchy table  str abovetype  int abovex  str belowtype  int belowx
+ "U" 0 "R" 1
+ "R" 1 "A" 1
+ "R" 1 "A" 2
+ "R" 1 "A" 3
+ "R" 1 "A" 4
+ "R" 1 "A" 5
+ "R" 1 "A" 6
+ "R" 1 "A" 7
+ "R" 1 "A" 8
+ "R" 1 "A" 9
+ "R" 1 "A" 10
+ "R" 1 "A" 11
+ "R" 1 "A" 12
+ "R" 1 "A" 13
+ "R" 1 "A" 14
+ "R" 1 "A" 15
+ "R" 1 "A" 16
+ "R" 1 "A" 17
+ "R" 1 "A" 18
+ "R" 1 "A" 19
+ "R" 1 "A" 20
+!entry.NBZ.unit.name single str
+ "NBZ"
+!entry.NBZ.unit.positions table  dbl x  dbl y  dbl z
+ 3.540003 1.419779 1.933042E-06
+ 4.919664 1.824637 0.489885
+ 5.105631 1.358648 1.945863
+ 6.516357 1.286614 2.556751
+ 6.702324 0.820624 4.012728
+ 5.476498 0.426740 4.857598
+ 4.065770 0.498773 4.246713
+ 3.879799 0.964763 2.790737
+ 2.880798 1.015804 2.357734
+ 3.197840 0.220839 4.844669
+ 5.608460 0.097806 5.888369
+ 7.701324 0.769581 4.445733
+ 7.384092 1.565487 1.958949
+ 5.679003 1.360396 -0.139388
+ 5.018721 2.908974 0.439866
+ 3.428066 1.886629 -1.374573
+ 4.152769 1.367803 -2.000310
+ 2.430156 1.637679 -1.735543
+ 3.617163 3.400994 -1.508610
+ 3.834153 4.043923 -0.482716
+!entry.NBZ.unit.residueconnect table  int c1x  int c2x  int c3x  int c4x  int c5x  int c6x
+ 1 19 0 0 0 0
+!entry.NBZ.unit.residues table  str name  int seq  int childseq  int startatomx  str restype  int imagingx
+ "NBZ" 1 21 1 "?" 0
+!entry.NBZ.unit.residuesPdbSequenceNumber array int
+ 0
+!entry.NBZ.unit.solventcap array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.NBZ.unit.velocities table  dbl x  dbl y  dbl z
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0

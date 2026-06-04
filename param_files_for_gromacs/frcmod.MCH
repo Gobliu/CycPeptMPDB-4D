@@ -1,0 +1,16 @@
+Remark line goes here
+MASS
+
+BOND
+
+ANGLE
+C -CT-N   80.000     111.200   same as C -CT-N3, penalty score=  0.1
+
+DIHE
+
+IMPROPER
+
+NONBON
+
+
+

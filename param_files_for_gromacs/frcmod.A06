@@ -1,0 +1,70 @@
+Remark line goes here
+MASS
+N 14.010        0.530               same as n3 
+CT 12.010        0.878               same as c3 
+H1 1.008         0.135               same as h1 
+CA 12.010        0.360               same as ca 
+HA 1.008         0.135               same as ha 
+Cl 35.450        1.910               same as cl 
+C  12.010        0.616               same as c  
+O  16.000        0.434               same as o  
+
+BOND
+CT-N  325.90   1.465       same as c3-n3, penalty score=  0.0
+CT-H1  330.60   1.097       same as c3-h1, penalty score=  0.0
+CA-CT  321.00   1.516       same as c3-ca, penalty score=  0.0
+CA-CA  461.10   1.398       same as ca-ca, penalty score=  0.0
+CA-HA  345.80   1.086       same as ca-ha, penalty score=  0.0
+CA-Cl  305.60   1.750       same as ca-cl, penalty score=  0.0
+C -CT  313.00   1.524       same as  c-c3, penalty score=  0.0
+C -O   637.70   1.218       same as  c- o, penalty score=  0.0
+
+ANGLE
+H1-CT-N   49.500     109.880   same as h1-c3-n3, penalty score=  0.0
+CA-CT-N   66.200     112.160   same as ca-c3-n3, penalty score=  0.0
+C -CT-N   66.300     111.140   same as c -c3-n3, penalty score=  0.0
+CT-N-CT   63.800     112.350   same as c3-n3-c3, penalty score=  0.0
+CA-CA-CT   63.500     120.770   same as c3-ca-ca, penalty score=  0.0
+CA-CT-H1   47.000     109.560   same as ca-c3-h1, penalty score=  0.0
+H1-CT-H1   39.200     108.460   same as h1-c3-h1, penalty score=  0.0
+CA-CA-CA   66.600     120.020   same as ca-ca-ca, penalty score=  0.0
+CA-CA-HA   48.200     119.880   same as ca-ca-ha, penalty score=  0.0
+CA-CA-Cl   57.900     119.390   same as ca-ca-cl, penalty score=  0.0
+CT-C -O    67.400     123.200   same as c3-c -o , penalty score=  0.0
+C -CT-H1   47.000     108.220   same as c -c3-h1, penalty score=  0.0
+
+DIHE
+CA-CA-CT-N   6    0.000         0.000           2.000      same as X -c3-ca-X , penalty score=  0.0
+O -C -CT-N   6    0.000       180.000           2.000      same as X -c -c3-X , penalty score=  0.0
+H1-CT-N-CT   6    1.800         0.000           3.000      same as X -c3-n3-X , penalty score=  0.0
+C -CT-N-CT   6    1.800         0.000           3.000      same as X -c3-n3-X , penalty score=  0.0
+CA-CA-CA-CT   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+CT-CA-CA-HA   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+CA-CA-CT-H1   6    0.000         0.000           2.000      same as X -c3-ca-X , penalty score=  0.0
+CA-CA-CA-CA   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+CA-CA-CA-HA   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+CA-CA-CA-Cl   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+HA-CA-CA-HA   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+Cl-CA-CA-HA   4   14.500       180.000           2.000      same as X -ca-ca-X , penalty score=  0.0
+CA-CT-N-CT   6    1.800         0.000           3.000      same as X -c3-n3-X , penalty score=  0.0
+O -C -CT-H1   1    0.800         0.000          -1.000      same as h1-c3-c -o 
+O -C -CT-H1   1    0.000         0.000          -2.000      same as h1-c3-c -o 
+O -C -CT-H1   1    0.080       180.000           3.000      same as h1-c3-c -o , penalty score=  0.0
+
+IMPROPER
+CA-CT-CA-CT         1.1          180.0         2.0          Using the default value
+CA-CT-CA-HA         1.1          180.0         2.0          Same as X -X -ca-ha, penalty score=  6.0 (use general term))
+CA-CT-CA-Cl         1.1          180.0         2.0          Using the default value
+
+NONBON
+  N          1.8240  0.1700             same as n3 
+  CT          1.9080  0.1094             same as c3 
+  H1          1.3870  0.0157             same as h1 
+  CA          1.9080  0.0860             same as ca 
+  HA          1.4590  0.0150             same as ha 
+  Cl          1.9480  0.2650             same as cl 
+  C           1.9080  0.0860             same as c  
+  O           1.6612  0.2100             same as o  
+
+
+

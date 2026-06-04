@@ -1,0 +1,93 @@
+!!index array str
+ "MGL"
+!entry.MGL.unit.atoms table  str name  str type  int typex  int resx  int flags  int seq  int elmnt  dbl chg
+ "N" "N" 0 1 131072 1 7 -0.740249
+ "CM" "CT" 0 1 131072 2 6 0.152038
+ "HM1" "H1" 0 1 131072 3 1 0.043444
+ "HM2" "H1" 0 1 131072 4 1 0.043444
+ "HM3" "H1" 0 1 131072 5 1 0.043444
+ "CA" "CT" 0 1 131072 6 6 0.133264
+ "HA" "H1" 0 1 131072 7 1 0.097886
+ "HA2" "H1" 0 1 131072 8 1 0.097886
+ "C" "C" 0 1 131072 9 6 0.639297
+ "O" "O" 0 1 131072 10 8 -0.510453
+!entry.MGL.unit.atomspertinfo table  str pname  str ptype  int ptypex  int pelmnt  dbl pchg
+ "N" "N" 0 -1 0.0
+ "CM" "CT" 0 -1 0.0
+ "HM1" "H1" 0 -1 0.0
+ "HM2" "H1" 0 -1 0.0
+ "HM3" "H1" 0 -1 0.0
+ "CA" "CT" 0 -1 0.0
+ "HA" "H1" 0 -1 0.0
+ "HA2" "H1" 0 -1 0.0
+ "C" "C" 0 -1 0.0
+ "O" "O" 0 -1 0.0
+!entry.MGL.unit.boundbox array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.MGL.unit.childsequence single int
+ 2
+!entry.MGL.unit.connect array int
+ 1
+ 9
+!entry.MGL.unit.connectivity table  int atom1x  int atom2x  int flags
+ 1 2 1
+ 1 6 1
+ 2 3 1
+ 2 4 1
+ 2 5 1
+ 6 7 1
+ 6 8 1
+ 6 9 1
+ 9 10 1
+!entry.MGL.unit.hierarchy table  str abovetype  int abovex  str belowtype  int belowx
+ "U" 0 "R" 1
+ "R" 1 "A" 1
+ "R" 1 "A" 2
+ "R" 1 "A" 3
+ "R" 1 "A" 4
+ "R" 1 "A" 5
+ "R" 1 "A" 6
+ "R" 1 "A" 7
+ "R" 1 "A" 8
+ "R" 1 "A" 9
+ "R" 1 "A" 10
+!entry.MGL.unit.name single str
+ "MGL"
+!entry.MGL.unit.positions table  dbl x  dbl y  dbl z
+ 3.540003 1.419779 1.933042E-06
+ 3.378932 -0.058464 0.315050
+ 3.493966 -0.216531 1.388392
+ 4.138696 -0.629317 -0.218790
+ 2.388759 -0.391491 0.004002
+ 3.429054 1.886654 -1.374645
+ 4.189713 1.387837 -1.973395
+ 2.439843 1.625640 -1.750721
+ 3.618169 3.401103 -1.507702
+ 3.834207 4.044133 -0.481671
+!entry.MGL.unit.residueconnect table  int c1x  int c2x  int c3x  int c4x  int c5x  int c6x
+ 1 9 0 0 0 0
+!entry.MGL.unit.residues table  str name  int seq  int childseq  int startatomx  str restype  int imagingx
+ "MGL" 1 11 1 "?" 0
+!entry.MGL.unit.residuesPdbSequenceNumber array int
+ 0
+!entry.MGL.unit.solventcap array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.MGL.unit.velocities table  dbl x  dbl y  dbl z
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0

@@ -1,0 +1,111 @@
+!!index array str
+ "ABU"
+!entry.ABU.unit.atoms table  str name  str type  int typex  int resx  int flags  int seq  int elmnt  dbl chg
+ "N" "N" 0 1 131072 1 7 -0.843217
+ "H" "H" 0 1 131072 2 1 0.387810
+ "CA" "CT" 0 1 131072 3 6 0.136981
+ "CB" "CT" 0 1 131072 4 6 -0.110586
+ "CG1" "CT" 0 1 131072 5 6 -0.090692
+ "HG11" "HC" 0 1 131072 6 1 0.045163
+ "HG12" "HC" 0 1 131072 7 1 0.045163
+ "HG13" "HC" 0 1 131072 8 1 0.045163
+ "HB1" "HC" 0 1 131072 9 1 0.057244
+ "HB2" "HC" 0 1 131072 10 1 0.057244
+ "HA" "H1" 0 1 131072 11 1 0.100950
+ "C" "C" 0 1 131072 12 6 0.683411
+ "O" "O" 0 1 131072 13 8 -0.514635
+!entry.ABU.unit.atomspertinfo table  str pname  str ptype  int ptypex  int pelmnt  dbl pchg
+ "N" "N" 0 -1 0.0
+ "H" "H" 0 -1 0.0
+ "CA" "CT" 0 -1 0.0
+ "CB" "CT" 0 -1 0.0
+ "CG1" "CT" 0 -1 0.0
+ "HG11" "HC" 0 -1 0.0
+ "HG12" "HC" 0 -1 0.0
+ "HG13" "HC" 0 -1 0.0
+ "HB1" "HC" 0 -1 0.0
+ "HB2" "HC" 0 -1 0.0
+ "HA" "H1" 0 -1 0.0
+ "C" "C" 0 -1 0.0
+ "O" "O" 0 -1 0.0
+!entry.ABU.unit.boundbox array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.ABU.unit.childsequence single int
+ 2
+!entry.ABU.unit.connect array int
+ 1
+ 12
+!entry.ABU.unit.connectivity table  int atom1x  int atom2x  int flags
+ 1 2 1
+ 1 3 1
+ 3 4 1
+ 3 11 1
+ 3 12 1
+ 4 5 1
+ 4 9 1
+ 4 10 1
+ 5 6 1
+ 5 7 1
+ 5 8 1
+ 12 13 1
+!entry.ABU.unit.hierarchy table  str abovetype  int abovex  str belowtype  int belowx
+ "U" 0 "R" 1
+ "R" 1 "A" 1
+ "R" 1 "A" 2
+ "R" 1 "A" 3
+ "R" 1 "A" 4
+ "R" 1 "A" 5
+ "R" 1 "A" 6
+ "R" 1 "A" 7
+ "R" 1 "A" 8
+ "R" 1 "A" 9
+ "R" 1 "A" 10
+ "R" 1 "A" 11
+ "R" 1 "A" 12
+ "R" 1 "A" 13
+!entry.ABU.unit.name single str
+ "ABU"
+!entry.ABU.unit.positions table  dbl x  dbl y  dbl z
+ 3.540003 1.419779 1.933042E-06
+ 3.735038 2.116806 0.788047
+ 3.427990 1.886939 -1.374462
+ 1.965855 1.574981 -1.863515
+ 1.745897 1.999962 -3.330436
+ 0.723605 1.765944 -3.627515
+ 2.442695 1.462059 -3.973267
+ 1.915991 3.072227 -3.427469
+ 1.261175 2.115782 -1.231803
+ 1.778831 0.505179 -1.770537
+ 4.149896 1.365974 -2.003387
+ 3.617084 3.401305 -1.508490
+ 3.834081 4.044228 -0.482594
+!entry.ABU.unit.residueconnect table  int c1x  int c2x  int c3x  int c4x  int c5x  int c6x
+ 1 12 0 0 0 0
+!entry.ABU.unit.residues table  str name  int seq  int childseq  int startatomx  str restype  int imagingx
+ "ABU" 1 14 1 "?" 0
+!entry.ABU.unit.residuesPdbSequenceNumber array int
+ 0
+!entry.ABU.unit.solventcap array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.ABU.unit.velocities table  dbl x  dbl y  dbl z
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0

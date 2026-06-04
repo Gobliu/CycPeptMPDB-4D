@@ -1,0 +1,129 @@
+!!index array str
+ "NPR"
+!entry.NPR.unit.atoms table  str name  str type  int typex  int resx  int flags  int seq  int elmnt  dbl chg
+ "N" "N" 0 1 131072 1 7 -0.738094
+ "CB" "CT" 0 1 131072 2 6 0.164105
+ "HB1" "H1" 0 1 131072 3 1 0.042918
+ "HB2" "H1" 0 1 131072 4 1 0.042918
+ "CD" "CT" 0 1 131072 5 6 -0.075721
+ "CE" "CT" 0 1 131072 6 6 -0.086472
+ "H1" "HC" 0 1 131072 7 1 0.039315
+ "H2" "HC" 0 1 131072 8 1 0.039315
+ "H73" "HC" 0 1 131072 9 1 0.039315
+ "H71" "HC" 0 1 131072 10 1 0.052107
+ "H72" "HC" 0 1 131072 11 1 0.052107
+ "CA" "CT" 0 1 131072 12 6 0.088431
+ "HA" "H1" 0 1 131072 13 1 0.083998
+ "HA2" "H1" 0 1 131072 14 1 0.083998
+ "C" "C" 0 1 131072 15 6 0.623879
+ "O" "O" 0 1 131072 16 8 -0.452119
+!entry.NPR.unit.atomspertinfo table  str pname  str ptype  int ptypex  int pelmnt  dbl pchg
+ "N" "N" 0 -1 0.0
+ "CB" "CT" 0 -1 0.0
+ "HB1" "H1" 0 -1 0.0
+ "HB2" "H1" 0 -1 0.0
+ "CD" "CT" 0 -1 0.0
+ "CE" "CT" 0 -1 0.0
+ "H1" "HC" 0 -1 0.0
+ "H2" "HC" 0 -1 0.0
+ "H73" "HC" 0 -1 0.0
+ "H71" "HC" 0 -1 0.0
+ "H72" "HC" 0 -1 0.0
+ "CA" "CT" 0 -1 0.0
+ "HA" "H1" 0 -1 0.0
+ "HA2" "H1" 0 -1 0.0
+ "C" "C" 0 -1 0.0
+ "O" "O" 0 -1 0.0
+!entry.NPR.unit.boundbox array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.NPR.unit.childsequence single int
+ 2
+!entry.NPR.unit.connect array int
+ 1
+ 15
+!entry.NPR.unit.connectivity table  int atom1x  int atom2x  int flags
+ 1 2 1
+ 1 12 1
+ 2 3 1
+ 2 4 1
+ 2 5 1
+ 5 6 1
+ 5 10 1
+ 5 11 1
+ 6 7 1
+ 6 8 1
+ 6 9 1
+ 12 13 1
+ 12 14 1
+ 12 15 1
+ 15 16 1
+!entry.NPR.unit.hierarchy table  str abovetype  int abovex  str belowtype  int belowx
+ "U" 0 "R" 1
+ "R" 1 "A" 1
+ "R" 1 "A" 2
+ "R" 1 "A" 3
+ "R" 1 "A" 4
+ "R" 1 "A" 5
+ "R" 1 "A" 6
+ "R" 1 "A" 7
+ "R" 1 "A" 8
+ "R" 1 "A" 9
+ "R" 1 "A" 10
+ "R" 1 "A" 11
+ "R" 1 "A" 12
+ "R" 1 "A" 13
+ "R" 1 "A" 14
+ "R" 1 "A" 15
+ "R" 1 "A" 16
+!entry.NPR.unit.name single str
+ "NPR"
+!entry.NPR.unit.positions table  dbl x  dbl y  dbl z
+ 3.540003 1.419779 1.933042E-06
+ 4.919664 1.824637 0.489885
+ 5.679003 1.360396 -0.139388
+ 5.018721 2.908974 0.439866
+ 5.104658 1.358601 1.945971
+ 6.503463 1.768493 2.442894
+ 6.633459 1.439489 3.473892
+ 6.603517 2.853790 2.393884
+ 7.263310 1.305556 1.815006
+ 5.005608 0.274310 1.996980
+ 4.345730 1.822591 2.575925
+ 3.428066 1.886629 -1.374573
+ 4.152769 1.367803 -2.000310
+ 2.430156 1.637679 -1.735543
+ 3.617163 3.400994 -1.508610
+ 3.834153 4.043923 -0.482716
+!entry.NPR.unit.residueconnect table  int c1x  int c2x  int c3x  int c4x  int c5x  int c6x
+ 1 15 0 0 0 0
+!entry.NPR.unit.residues table  str name  int seq  int childseq  int startatomx  str restype  int imagingx
+ "NPR" 1 17 1 "?" 0
+!entry.NPR.unit.residuesPdbSequenceNumber array int
+ 0
+!entry.NPR.unit.solventcap array dbl
+ -1.000000
+ 0.0
+ 0.0
+ 0.0
+ 0.0
+!entry.NPR.unit.velocities table  dbl x  dbl y  dbl z
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0
+ 0.0 0.0 0.0

@@ -21,7 +21,7 @@ residue id,residue name,atom name,atom id,residue id,residue name,atom name,atom
 3,MEA,HA,31,4,PRO,HA,45,0,5,2.08,-2.92
 6,PRO,HA,78,1,ITZ,H,82,0,5,2.16,-2.84
 7ubg,,,,,,,,,,,
-1,DPR,HA,12,3,ALA,HN (=H??),29,,5.27,3.53,-1.74
+1,DPR,HA,12,3,ALA,HN,29,,5.27,3.53,-1.74
 2,MAA,HA,25,3,ALA,HN,29,,3.53,2.65,-0.88
 2,MAA,HA,25,4,DVA,HN,39,,4.79,3.56,-1.23
 3,ALA,HN,29,4,DVA,HN,39,,3.43,2.22,-1.21

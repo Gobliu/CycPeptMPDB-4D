@@ -17,3 +17,10 @@ jobsub.sh
 
 # Explicitly allow data analysis data
 !pts/*.pt
+
+# Bulk per-peptide data belongs in the sibling Data/ dir, not the repo
+avg_pairwise_rmsd/
+
+# Source-publication PDF (copyright) and scratch image
+cycpeptmpdb-a-comprehensive-database-of-membrane-permeability-of-cyclic-peptides.pdf
+Untitled.jpeg

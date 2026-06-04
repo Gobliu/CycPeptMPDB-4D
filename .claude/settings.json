@@ -4,7 +4,9 @@
       "Bash(xxd:*)",
       "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/pip install dgl -f https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html)",
       "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/pip install --force-reinstall --no-deps dgl -f https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html)",
-      "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/python -c \":*)"
+      "Bash(/home/liuw/miniforge3/envs/cycpeptmpdb-4d/bin/python -c \":*)",
+      "Bash(conda env remove -n cycpeptmpdb-4d -y)",
+      "Bash(git push origin main)"
     ],
     "additionalDirectories": [
       "/home/liuw/GitHub/CycPeptMPDB-4D/csvs",

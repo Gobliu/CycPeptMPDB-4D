@@ -21,10 +21,9 @@ for i, pdb in enumerate(pdb_list):
 
 # Horizontal zero line
 # plt.axhline(0, color='black', linewidth=1, linestyle='-', alpha=0.8)
-
 # Set y-range and axis labels
-plt.ylabel('Coverage', fontsize=16)
-plt.xlabel('RMSD threshold (Å)', fontsize=16)  # Larger y-axis label font
+plt.ylabel('Coverage', fontsize=14)
+plt.xlabel('RMSD threshold (Å)', fontsize=14)  # Larger y-axis label font
 # Remove x-axis ticks and labels entirely
 # plt.xticks(np.linspace(0, 0.1, 11))  # removes tick marks and labels
 # plt.tick_params(axis='x', bottom=False, labelbottom=False)

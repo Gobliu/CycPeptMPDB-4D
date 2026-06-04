@@ -12,6 +12,7 @@ CSV_PATH = REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv"
 df = pd.read_csv(CSV_PATH)
 
 # --- Plot config ---
+NM2_TO_A2 = 100.0  # 1 nm^2 = 100 Å^2; raw columns are in nm^2
 colors = {"Hexane": "#4C72B0", "Water": "#C44E52"}
 metrics = [
     ('3D_SASA', '3D-SASA'),
@@ -24,11 +25,11 @@ fig, axes = plt.subplots(1, 3, figsize=(15, 4), sharey=True)
 
 for i, (ax, (suffix, title)) in enumerate(zip(axes, metrics)):
     # KDEs
-    sns.kdeplot(df[f'Hexane_{suffix}'].dropna(), color=colors["Hexane"], linewidth=2, label="in hexane", ax=ax)
-    sns.kdeplot(df[f'Water_{suffix}'].dropna(),  color=colors["Water"],  linewidth=2, label="in water",  ax=ax)
+    sns.kdeplot(df[f'Hexane_{suffix}'].dropna() * NM2_TO_A2, color=colors["Hexane"], linewidth=2, label="in hexane", ax=ax)
+    sns.kdeplot(df[f'Water_{suffix}'].dropna() * NM2_TO_A2,  color=colors["Water"],  linewidth=2, label="in water",  ax=ax)
 
     # Labels / titles
-    ax.set_xlabel(r'Area (nm$^2$)', fontsize=14)
+    ax.set_xlabel(r'Area (Å$^2$)', fontsize=14)
     ax.set_title(f'Distribution of {title}', fontsize=16)
     if i == 0:
         ax.set_ylabel('Density', fontsize=14)

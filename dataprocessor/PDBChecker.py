@@ -1,10 +1,5 @@
-import os
-import shutil
-import pandas as pd
 from collections import defaultdict
 from rdkit import Chem
-from rdkit.Chem import AllChem
-from Bio.PDB import PDBParser
 
 
 def pdb_checker(pdb, smiles):

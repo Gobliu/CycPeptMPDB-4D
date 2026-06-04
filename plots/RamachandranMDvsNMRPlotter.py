@@ -50,9 +50,13 @@ for ax, pid in zip(axes.flat, PEPTIDES):
     ax.axhline(0, color="lightgrey", lw=0.5)
     ax.axvline(0, color="lightgrey", lw=0.5)
     ax.set_aspect("equal")
-    ax.set_title(pid, fontsize=16)
     ax.grid(alpha=0.3)
-    ax.legend(loc="upper right", fontsize=12, frameon=False)
+    ax.legend(loc="lower left", bbox_to_anchor=(0.03, 0.08), fontsize=12,
+              frameon=True, framealpha=0.9, edgecolor="black")
+
+    # Peptide id as a large label centered at the top of the panel
+    ax.text(0.5, 0.96, pid, transform=ax.transAxes,
+            ha="center", va="top", fontsize=22, fontweight="bold")
 
     ax.tick_params(axis="both", labelsize=15, width=2, direction="in", pad=2)
     for spine in ax.spines.values():
@@ -61,11 +65,10 @@ for ax, pid in zip(axes.flat, PEPTIDES):
 
 # Outer labels only
 for ax in axes[-1, :]:
-    ax.set_xlabel(r"$\phi$ (°)", fontsize=16)
+    ax.set_xlabel(r"$\phi$ (°)", fontsize=22)
 for ax in axes[:, 0]:
-    ax.set_ylabel(r"$\psi$ (°)", fontsize=16)
+    ax.set_ylabel(r"$\psi$ (°)", fontsize=22)
 
-fig.suptitle("Ramachandran: MD vs NMR  (6 cyclic peptides)", fontsize=18, y=0.995)
 plt.tight_layout()
 fig.savefig(SCRIPT_DIR / "RamachandranMDvsNMRPlotter.png", dpi=300,
             bbox_inches="tight")

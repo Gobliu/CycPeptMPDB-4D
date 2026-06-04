@@ -24,3 +24,5 @@ avg_pairwise_rmsd/
 # Source-publication PDF (copyright) and scratch image
 cycpeptmpdb-a-comprehensive-database-of-membrane-permeability-of-cyclic-peptides.pdf
 Untitled.jpeg
+# Excel lock/temp files
+~$*.xlsx

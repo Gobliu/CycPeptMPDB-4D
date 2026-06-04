@@ -12,6 +12,11 @@ dependencies:
   - numpy
   - pandas
   - scipy
+  # Plotting (plots/ scripts)
+  - matplotlib
+  - seaborn
+  # Excel I/O for the coverage .xlsx files
+  - openpyxl
   # BioPython for PDB parsing
   - biopython
   # Pip-only packages

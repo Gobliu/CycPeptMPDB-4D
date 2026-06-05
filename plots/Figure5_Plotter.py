@@ -51,7 +51,7 @@ for i, (ax, (suffix, title)) in enumerate(zip(axes, metrics)):
 axes[0].legend(frameon=False, fontsize=14)
 
 # Bold panel letters at each panel's top-left corner
-label_offset = ScaledTranslation(-25 / 72, 0 / 72, fig.dpi_scale_trans)
+label_offset = ScaledTranslation(-34 / 72, 6 / 72, fig.dpi_scale_trans)
 for ax, letter in zip(axes, 'abc'):
     ax.text(0.0, 1.0, letter, transform=ax.transAxes + label_offset,
             fontsize=22, fontweight='bold', va='bottom', ha='right')

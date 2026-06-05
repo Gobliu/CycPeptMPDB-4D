@@ -175,9 +175,8 @@ def plot_coverage(ax):
 def main():
     sns.set_theme(style="whitegrid", context="talk")
 
-    fig = plt.figure(figsize=(16.5, 11))
-    gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.05],
-                          hspace=0.35, wspace=0.22)
+    fig = plt.figure(figsize=(16.5, 11), layout="constrained")
+    gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.05])
     ax_noe = fig.add_subplot(gs[0, :])     # top, full width
     ax_omega = fig.add_subplot(gs[1, 0])   # bottom left
     ax_cov = fig.add_subplot(gs[1, 1])     # bottom right
@@ -188,7 +187,7 @@ def main():
 
     # Panel labels -- fixed offset in points from each panel's top-left corner,
     # so the label sits the same absolute distance out regardless of panel width.
-    label_offset = ScaledTranslation(-30 / 72, 0 / 72, fig.dpi_scale_trans)
+    label_offset = ScaledTranslation(-34 / 72, 6 / 72, fig.dpi_scale_trans)
     for ax, label in [(ax_noe, "a"), (ax_omega, "b"), (ax_cov, "c")]:
         ax.text(0.0, 1.0, label, transform=ax.transAxes + label_offset,
                 fontsize=22, fontweight="bold", va="bottom", ha="right")

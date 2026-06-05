@@ -46,8 +46,8 @@ SERIES_ORDER = ['CycPeptMPDB-4D', 'CycPeptMPDB-3D', 'CREMP']
 def main():
     sns.set_theme(style='whitegrid', context='talk')
 
-    fig = plt.figure(figsize=(16.5, 5.5))
-    gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.7], wspace=0.05)
+    fig = plt.figure(figsize=(16.5, 5.5), layout="constrained")
+    gs = fig.add_gridspec(1, 2, width_ratios=[1.0, 1.7])
     ax_img = fig.add_subplot(gs[0, 0])   # cis/trans cartoon
     ax_omega = fig.add_subplot(gs[0, 1])  # omega distribution
 
@@ -55,7 +55,7 @@ def main():
     plot_omega(ax_omega)
 
     # Bold panel letters at each panel's top-left corner
-    label_offset = ScaledTranslation(-10 / 72, 0 / 72, fig.dpi_scale_trans)
+    label_offset = ScaledTranslation(-34 / 72, 6 / 72, fig.dpi_scale_trans)
     for ax, letter in [(ax_img, 'a'), (ax_omega, 'b')]:
         ax.text(0.0, 1.0, letter, transform=ax.transAxes + label_offset,
                 fontsize=22, fontweight='bold', va='bottom', ha='right')

@@ -36,7 +36,7 @@ with open(CSV_PATH) as fh:
 sns.set_theme(style="whitegrid", context="talk")
 fig, axes = plt.subplots(2, 3, figsize=(16.5, 11), sharex=True, sharey=True)
 
-letter_offset = ScaledTranslation(-25 / 72, 0 / 72, fig.dpi_scale_trans)
+letter_offset = ScaledTranslation(-34 / 72, 6 / 72, fig.dpi_scale_trans)
 for ax, pid, letter in zip(axes.flat, PEPTIDES, "abcdef"):
     md_x, md_y   = data[pid]["MD"]
     nmr_x, nmr_y = data[pid]["NMR"]

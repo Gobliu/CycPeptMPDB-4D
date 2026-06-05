@@ -2,7 +2,7 @@
 """Combined 2x3 grid: MD vs NMR Ramachandran for all 6 validation peptides.
 
 Reads dihedrals.csv (per-model phi/psi backbone dihedrals) and writes
-RamachandranMDvsNMRPlotter.png, both alongside this script.
+Figure3.png, both alongside this script.
 """
 import csv
 from pathlib import Path
@@ -10,6 +10,7 @@ from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.transforms import ScaledTranslation
 
 # --- Paths ---
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -33,9 +34,10 @@ with open(CSV_PATH) as fh:
 
 # --- Plot ---
 sns.set_theme(style="whitegrid", context="talk")
-fig, axes = plt.subplots(2, 3, figsize=(15, 10), sharex=True, sharey=True)
+fig, axes = plt.subplots(2, 3, figsize=(16.5, 11), sharex=True, sharey=True)
 
-for ax, pid in zip(axes.flat, PEPTIDES):
+letter_offset = ScaledTranslation(-25 / 72, 0 / 72, fig.dpi_scale_trans)
+for ax, pid, letter in zip(axes.flat, PEPTIDES, "abcdef"):
     md_x, md_y   = data[pid]["MD"]
     nmr_x, nmr_y = data[pid]["NMR"]
     ax.scatter(md_x, md_y, s=14, c=MD_COLOR, alpha=0.35, edgecolors="none",
@@ -51,12 +53,16 @@ for ax, pid in zip(axes.flat, PEPTIDES):
     ax.axvline(0, color="lightgrey", lw=0.5)
     ax.set_aspect("equal")
     ax.grid(alpha=0.3)
-    ax.legend(loc="lower left", bbox_to_anchor=(0.03, 0.08), fontsize=12,
-              frameon=True, framealpha=0.9, edgecolor="black")
+    leg = ax.legend(loc="lower left", bbox_to_anchor=(0.03, 0.08), fontsize=14,
+                    frameon=True, framealpha=0.85, edgecolor="grey")
+    leg.get_frame().set_linewidth(0.9)
 
     # Peptide id as a large label centered at the top of the panel
     ax.text(0.5, 0.96, pid, transform=ax.transAxes,
             ha="center", va="top", fontsize=22, fontweight="bold")
+    # Bold panel letter at the top-left corner
+    ax.text(0.0, 1.0, letter, transform=ax.transAxes + letter_offset,
+            fontsize=22, fontweight="bold", va="bottom", ha="right")
 
     ax.tick_params(axis="both", labelsize=15, width=2, direction="in", pad=2)
     for spine in ax.spines.values():
@@ -65,11 +71,11 @@ for ax, pid in zip(axes.flat, PEPTIDES):
 
 # Outer labels only
 for ax in axes[-1, :]:
-    ax.set_xlabel(r"$\phi$ (°)", fontsize=22)
+    ax.set_xlabel(r"$\phi$ (°)", fontsize=16)
 for ax in axes[:, 0]:
-    ax.set_ylabel(r"$\psi$ (°)", fontsize=22)
+    ax.set_ylabel(r"$\psi$ (°)", fontsize=16)
 
 plt.tight_layout()
-fig.savefig(SCRIPT_DIR / "RamachandranMDvsNMRPlotter.png", dpi=300,
-            bbox_inches="tight")
+fig.savefig(SCRIPT_DIR / "Figure3.pdf", bbox_inches="tight")           # vector, for LaTeX
+fig.savefig(SCRIPT_DIR / "Figure3.png", dpi=300, bbox_inches="tight")  # preview only
 plt.show()

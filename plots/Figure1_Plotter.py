@@ -1,4 +1,9 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
+
+# --- Paths ---
+SCRIPT_DIR = Path(__file__).resolve().parent
 
 text = r"""
 CycPeptMPDB-4D/
@@ -36,8 +41,8 @@ plt.text(0.0, 1.0, text,
 plt.axis('off')
 
 fig.tight_layout(pad=0)
-plt.savefig("directory_tree.png", dpi=600, facecolor='white',
+plt.savefig(SCRIPT_DIR / "Figure1.png", dpi=600, facecolor='white',
             bbox_inches='tight', pad_inches=0)
-plt.savefig("directory_tree.pdf", dpi=600, facecolor='white',
+plt.savefig(SCRIPT_DIR / "Figure1.pdf", dpi=600, facecolor='white',
             bbox_inches='tight', pad_inches=0)
 plt.show()

@@ -14,7 +14,7 @@ Each peptide has been simulated in both hexane and water. The dataset provides:
 
 - **Trajectories** (100 frames per peptide per environment)
 - **Representative structures** extracted by conformational clustering
-- **Molecular descriptors** computed from the trajectories (RMSD, surface area, MMPBSA, dihedral angles)
+- **Molecular descriptors** computed from the trajectories (RMSD, radius of gyration, surface area, MMPBSA desolvation)
 - **PAMPA permeability** values from the original CycPeptMPDB
 
 ### Data directory layout
@@ -40,23 +40,22 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 |---|---|
 | `CycPeptMPDB_ID` | Unique identifier from the original CycPeptMPDB |
 | `Source` | Reference literature for the peptide data |
+| `SMILES` | Isomeric SMILES of the peptide |
+| `Sequence` | List of monomer symbols making up the peptide |
 | `Original_Name_in_Source_Literature` | Original peptide designation in the source literature |
 | `Structurally_Unique_ID` | Identifier grouping structurally identical peptides across sources |
 | `PAMPA` | Experimental membrane permeability (log cm/s) |
 | `Monomer_Length` | Total number of monomers in the peptide |
 | `Monomer_Length_in_Main_Chain` | Monomers in the main-chain cycle (differs from `Monomer_Length` for lariat-shaped peptides) |
 | `Molecule_Shape` | Structural topology (e.g., Circle, Lariat) |
-| `Water_avgRMSD_All` | Average RMSD of all heavy atoms in water (nm) |
-| `Water_avgRMSD_BackBone` | Average RMSD of backbone heavy atoms in water (nm) |
-| `Hexane_avgRMSD_All` | Average RMSD of all heavy atoms in hexane (nm) |
-| `Hexane_avgRMSD_BackBone` | Average RMSD of backbone heavy atoms in hexane (nm) |
-| `Desolvation_Free_Energy` | Desolvation free energy via MMPBSA (kcal/mol) |
-| `Water_3D_SASA` | Solvent Accessible Surface Area in water (nm²) |
-| `Water_3D_PSA` | Polar Surface Area in water (nm²) |
-| `Water_3D_NPSA` | Non-Polar Surface Area in water (nm²) |
-| `Hexane_3D_SASA` | Solvent Accessible Surface Area in hexane (nm²) |
-| `Hexane_3D_PSA` | Polar Surface Area in hexane (nm²) |
-| `Hexane_3D_NPSA` | Non-Polar Surface Area in hexane (nm²) |
+| `Water_avgRMSD_All`, `Hexane_avgRMSD_All` | Average pairwise RMSD of all heavy atoms (Å) |
+| `Water_avgRMSD_BackBone`, `Hexane_avgRMSD_BackBone` | Average pairwise RMSD of backbone atoms (Å) |
+| `Water_avgGR`, `Hexane_avgGR` | Average radius of gyration (Å) |
+| `Water_Desolvation_Free_Energy` | Desolvation free energy via MMPBSA (kcal/mol); water environment only |
+| `Water_3D_SASA`, `Hexane_3D_SASA` | Solvent-accessible surface area (Å²) |
+| `Water_3D_PSA`, `Hexane_3D_PSA` | Polar surface area (Å²) |
+| `Water_3D_NPSA`, `Hexane_3D_NPSA` | Non-polar surface area (Å²) |
+| `Water_RepFrame`, `Hexane_RepFrame` | 1-based trajectory frame index of the representative structure |
 
 ### Peptides not simulated (`csvs/missing_peptides.csv`)
 
@@ -107,7 +106,8 @@ CycPeptMPDB-4D/                  (this repo)
 ├── train_se3.py                 usage example: SE(3)-Transformer training
 ├── dataprocessor/               scripts used to build the dataset (not needed for general use)
 ├── plots/                       scripts used to generate figures
-└── pts/                         precomputed dihedral histograms
+├── pts/                         precomputed dihedral histograms
+└── docs/                        methods notes (chirality, backbone formula, omega distribution)
 ```
 
 The `dataprocessor/` and `plots/` directories contain internal scripts used to

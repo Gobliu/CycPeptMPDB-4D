@@ -1,0 +1,55 @@
+*HEADER    PEPTIDE BINDING PROTEIN                 03-JAN-21   7L98              
+*TITLE     CONNECTING HYDROPHOBIC SURFACES IN CYCLIC PEPTIDES INCREASES MEMBRANE 
+*TITLE    2 PERMEABILITY                                                         
+*COMPND    MOL_ID: 1;                                                            
+*COMPND   2 MOLECULE: CYCLIC PEPTIDE ALA-MEA-PRO-ILE-PRO-ITZ;                    
+*COMPND   3 CHAIN: A;                                                            
+*COMPND   4 ENGINEERED: YES                                                      
+*SOURCE    MOL_ID: 1;                                                            
+*SOURCE   2 SYNTHETIC: YES;                                                      
+*SOURCE   3 ORGANISM_SCIENTIFIC: HOMO SAPIENS;                                   
+*SOURCE   4 ORGANISM_COMMON: HUMAN;                                              
+*SOURCE   5 ORGANISM_TAXID: 9606                                                 
+*KEYWDS    CYCLIC PEPTIDES, PEPTIDE BINDING PROTEIN                              
+*EXPDTA    SOLUTION NMR                                                          
+*NUMMDL    4                                                                     
+*AUTHOR    H.N.HOANG                                                             
+*REVDAT   2   15-NOV-23 7L98    1                                                
+*REVDAT   1   08-SEP-21 7L98    0                                                
+# Restraints file 1: NOEtable_compound10.tbl
+! DanB cyclic NOE Assignment Table (from visual inspection)
+
+! A F P I P ITZ  10-9(S) 8-6(M) 5-3 (W) and 2-1 (vW)
+
+!L1
+assi(resi 1  and name  HN )(resi  2  and name  HA )       0.0 0.0 	6.0	  ! 1 vw
+
+!F2
+assi(resi 2  and name  HA  )(resi  4  and name  HN )       0.0 0.0 	3.5	  ! (8)M
+assi(resi 2  and name  HA )(resi  3  and name  HA )        0.0 0.0 	3.5	  ! (10)S, CIS AMIDE BOND change
+
+!P3
+assi(resi 3  and name  HA  )(resi  4  and name  HB )       0.0 0.0 	5.0	  ! 4 W 
+
+!I4
+assi(resi 4  and name  HN  )(resi  5  and name  HA )         0.0 0.0 	6.0       ! 1 VW
+assi(resi 4  and name  HN  )(resi  3  and name  HA )         0.0 0.0 	5.0       ! 1 VW
+assi(resi 4  and name  HN  )(resi  3  and name  HD1 )         0.0 0.0 	5.0       ! 1 VW
+assi(resi 4  and name  HA  )(resi  5  and name  HD1 )       0.0 0.0 	2.7       ! 9
+assi(resi 4  and name  HA  )(resi  5  and name  HD2 )       0.0 0.0 	2.7       ! 9
+
+!P5
+assi(resi 5  and name  HA   )(resi  6  and name  H1   )       0.0 0.0 	3.5       ! 9 change
+
+!ITZ6
+assi(resi 6  and name  HA )(resi  5  and name  HA )       0.0 0.0 	6.0       ! 2
+
+
+!H-Bonds
+
+assign (resid  1 and name  O     )(resid 4 and name  HN   ) 1.88 0.3 0.42
+assign (resid  1 and name  O     )(resid 4 and name  N    ) 2.88 0.3 0.3
+
+assign (resid  4 and name  O     )(resid 1 and name  HN   ) 1.88 0.3 0.42
+assign (resid  4 and name  O     )(resid 1 and name  N    ) 2.88 0.3 0.3
+

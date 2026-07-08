@@ -49,7 +49,7 @@ def audit_missing_data(
             "Hexane_avgRMSD_All", "Hexane_avgRMSD_BackBone",
         ],
         "MMPBSA": [
-            "Desolvation_Free_Energy",
+            "Water_Desolvation_Free_Energy",
         ],
         "SA": [
             "Water_3D_SASA", "Water_3D_NPSA", "Water_3D_PSA",
@@ -63,7 +63,7 @@ def audit_missing_data(
         "Water_avgRMSD_BackBone":  "Wat-RMSD-B",
         "Hexane_avgRMSD_All": "Hex-RMSD-A",
         "Hexane_avgRMSD_BackBone":  "Hex-RMSD-B",
-        "Desolvation_Free_Energy": "Desolv",
+        "Water_Desolvation_Free_Energy": "Desolv",
         "Water_3D_SASA":  "Wat-SASA",
         "Water_3D_NPSA":  "Wat-NPSA",
         "Water_3D_PSA":   "Wat-PSA",

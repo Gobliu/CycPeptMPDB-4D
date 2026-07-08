@@ -4,7 +4,7 @@
 Layout:
     (a) NOE constraint deviations  -- top, spanning full width
     (b) Omega distribution MD vs NMR -- bottom left
-    (c) Cluster coverage vs RMSD threshold -- bottom right
+    (c) NMR-derived conformer coverage vs RMSD threshold -- bottom right
 
 Merges NOEPlotter.py, OmegaDistributionMDvsNMRPlotter.py and CoveragePlotter.py
 into a single figure. Writes Figure2.png alongside this script.
@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.patches import Patch
 from matplotlib.transforms import ScaledTranslation
 from pathlib import Path
 
@@ -22,6 +23,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 CSV_DIR = REPO_ROOT / "csvs"
+NOE_CSV = CSV_DIR / "all_NOE_MD_comparison.csv"
 
 # --- Shared style ---
 BLOCK_COLORS = ["#4C72B0", "#55A868", "#C44E52", "#8172B2", "#CCB974", "#64B5CD"]
@@ -34,68 +36,64 @@ NMR_COLOR = "#C44E52"  # red
 # Panel (a) -- NOE constraint deviations
 # ============================================================
 def plot_noe(ax):
-    df = pd.read_csv(CSV_DIR / "NOE.csv")
+    """One bar per NOE restraint: MD r^-6 distance minus the NMR upper bound.
 
-    nan_mask = df["delta_dist"].isna()
-    df["delta_dist"] = df["delta_dist"].fillna(0)
-    y = df["delta_dist"].values
+    Bars <= 0 satisfy the restraint; bars > 0 are violations. Grey whiskers span
+    the 5th-95th percentile of the per-frame MD distance (relative to r_traj), so
+    a whisker crossing zero flags a transiently violated restraint. Restraints are
+    grouped and colored by peptide, matching panel (c).
+    """
+    df = pd.read_csv(NOE_CSV)
+    df = df[df["status"] == "ok"].reset_index(drop=True)
 
-    pair_labels = df.apply(atom_pair_label, axis=1).values
+    x, dev, lo_err, hi_err, colors, names = noe_group_layout(df)
+    ax.bar(x, dev, color=colors, width=0.72, edgecolor="white", linewidth=0.3, zorder=3)
+    ax.errorbar(x, dev, yerr=[lo_err, hi_err], fmt="none",
+                ecolor="0.35", elinewidth=0.7, capsize=1.2, alpha=0.7, zorder=4)
+    ax.axhline(0, color="black", linewidth=1.0, alpha=0.8, zorder=5)
 
-    # Find all NaN row indices, skip the first if it's at position 0
-    nan_idx = np.where(nan_mask.values)[0].tolist()
-    if nan_idx and nan_idx[0] == 0:
-        nan_idx = nan_idx[1:]
-
-    # Split into blocks (continuous non-NaN regions)
-    blocks = []
-    start = 0
-    for ni in nan_idx:
-        if ni - start > 0:
-            blocks.append((start, ni - 1))
-        start = ni + 1
-    if start < len(df):
-        blocks.append((start, len(df) - 1))
-
-    for i, (s, e) in enumerate(blocks):
-        idx = np.arange(s, e + 1)
-        ax.bar(idx, y[idx], color=BLOCK_COLORS[i], edgecolor="none",
-               width=0.9, label=PDB_LIST[i])
-
-    ax.axhline(0, color="black", linewidth=1, linestyle="-", alpha=0.8)
-    ax.set_ylim(-3.2, 0.6)
+    ymin = (df["md_p5_A"] - df["upper_A"]).min()
+    ymax = (df["md_p95_A"] - df["upper_A"]).max()
+    ax.set_ylim(ymin - 0.25, ymax + 1.0)   # headroom for the color key
+    ax.set_xlim(x[0] - 1.5, x[-1] + 1.5)
     ax.set_ylabel(r"$\mathrm{r_{traj}} - \mathrm{r_{NOE}}\ (\mathrm{Å})$", fontsize=16)
-    ax.set_xlabel("Unambiguous long distance NOE constraints", fontsize=16)
     ax.set_title("NOE distance deviations", fontsize=16)
 
-    bar_idx = [i for s, e in blocks for i in range(s, e + 1)]
-    ax.set_xticks(bar_idx)
-    ax.set_xticklabels([pair_labels[i] for i in bar_idx],
-                       rotation=45, fontsize=13, ha="right", rotation_mode="anchor")
-    ax.tick_params(axis="x", bottom=True, labelbottom=True, length=0)
+    # PDB identified by color (matches panel c); no per-restraint x labels
+    ax.set_xticks([])
+    handles = [Patch(facecolor=BLOCK_COLORS[PDB_LIST.index(p)], label=p) for p in names]
+    ax.legend(handles=handles, ncol=len(handles), frameon=False, fontsize=14,
+              loc="upper center", bbox_to_anchor=(0.5, 1.0),
+              columnspacing=1.2, handlelength=1.2, handletextpad=0.5)
     ax.tick_params(axis="y", labelsize=15, width=2, direction="in", pad=2)
     ax.grid(False, axis="x")
     ax.grid(alpha=0.3, axis="y")
-    ax.legend(ncol=3, frameon=False, loc="lower right",
-              bbox_to_anchor=(1.0, -0.04), fontsize=14)
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_linewidth(1.5)
         spine.set_edgecolor("black")
 
 
-def atom_pair_label(row):
-    """Build a residue-pair label per row, e.g. "R3-4" (atom names omitted)."""
-    def resid_of(resname, resid, atom):
-        if pd.isna(resname) or pd.isna(atom):
-            return None
-        return int(float(resid))
-
-    a = resid_of(row["residue name"], row["residue id"], row["atom name"])
-    b = resid_of(row["residue name.1"], row["residue id.1"], row["atom name.1"])
-    if a is None or b is None:
-        return ""
-    return f"R{a}-{b}"
+def noe_group_layout(df, gap=2):
+    """Assign x positions (gaps between peptides) and per-bar geometry, colored by peptide."""
+    x, dev, lo_err, hi_err, colors, names = [], [], [], [], [], []
+    cursor = 0
+    for i, pep in enumerate(PDB_LIST):
+        sub = df[df["peptide"] == pep]
+        if sub.empty:
+            continue
+        for _, row in sub.iterrows():
+            x.append(cursor)
+            dev.append(row["dev_A"])
+            # whisker = 5th/95th percentile of the MD distance, relative to r_traj
+            lo_err.append(row["md_r6_A"] - row["md_p5_A"])
+            hi_err.append(row["md_p95_A"] - row["md_r6_A"])
+            colors.append(BLOCK_COLORS[i])
+            cursor += 1
+        names.append(pep)
+        cursor += gap
+    return (np.array(x), np.array(dev), np.array(lo_err),
+            np.array(hi_err), colors, names)
 
 
 # ============================================================
@@ -146,7 +144,7 @@ def wrap_omega(deg):
 
 
 # ============================================================
-# Panel (c) -- Cluster coverage vs RMSD threshold
+# Panel (c) -- NMR-derived conformer coverage vs RMSD threshold
 # ============================================================
 def plot_coverage(ax):
     df = pd.read_csv(CSV_DIR / "coverage.csv")
@@ -158,7 +156,7 @@ def plot_coverage(ax):
 
     ax.set_ylabel("Coverage", fontsize=16)
     ax.set_xlabel("RMSD threshold (Å)", fontsize=16)
-    ax.set_title("Cluster coverage", fontsize=16)
+    ax.set_title("NMR-derived conformer coverage", fontsize=16)
     ax.tick_params(axis="y", labelsize=15, width=2, direction="in", pad=2)
     ax.tick_params(axis="x", labelsize=15, width=2, direction="in", pad=2)
     ax.grid(alpha=0.3)

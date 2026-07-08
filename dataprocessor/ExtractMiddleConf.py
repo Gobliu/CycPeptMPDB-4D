@@ -4,10 +4,6 @@ import pandas as pd
 from typing import List, Optional, Generator
 
 ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
-RAW_TIME_NS_COLUMN_MAP = {
-    "Water": "Water_raw_time_ns",
-    "Hexane": "Hexane_raw_time_ns",
-}
 SUPPORTED_ENVS = tuple(ENV_SUFFIX_MAP.keys())
 
 
@@ -72,9 +68,10 @@ def extract_pdb_by_time(input_pdb: str, output_pdb: str, target_time_ps: float) 
 
 def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None:
     """
-    Processes logs and trajectories to extract middle-cluster structures.
-    Tracks and reports missing files specifically (log-only vs traj-only),
-    and writes env-specific raw_time_ns into the input CSV.
+    Processes logs and trajectories to extract middle-cluster structures into
+    <env>/Structures/. Tracks and reports missing files specifically
+    (log-only vs traj-only). The CSV is read only as the peptide manifest and
+    is not modified.
     """
     assert env_name in SUPPORTED_ENVS, (
         f"Unsupported environment: {env_name}. "
@@ -97,14 +94,6 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
     missing_required = required_cols - set(df.columns)
     assert not missing_required, f"CSV missing required columns: {missing_required}"
 
-    for col in ("Water_Structure_ID", "Hexane_Structure_ID", "raw_time_ns"):
-        if col in df.columns:
-            df = df.drop(columns=[col])
-
-    raw_time_col = RAW_TIME_NS_COLUMN_MAP[env_name]
-    if raw_time_col not in df.columns:
-        df[raw_time_col] = pd.NA
-    
     # Categorization for reporting
     missing_both: List[str] = []
     log_only: List[str] = []
@@ -112,7 +101,7 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
     error_files: List[str] = []
     processed_count: int = 0
 
-    for idx, row in df.iterrows():
+    for _, row in df.iterrows():
         source = str(row["Source"]).strip()
         cp_id = str(row["CycPeptMPDB_ID"]).strip()
         env_suffix = ENV_SUFFIX_MAP[env_name]
@@ -126,8 +115,6 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
         if os.path.exists(log_path):
             try:
                 raw_time_ns = get_cluster_middle_time(log_path)
-                if raw_time_ns is not None:
-                    df.at[idx, raw_time_col] = raw_time_ns
             except (AssertionError, Exception) as e:
                 print(f"Error parsing raw_time_ns from {log_path}: {e}")
                 error_files.append(id_tag)
@@ -187,15 +174,12 @@ def process_structures(csv_path: str, base_data_dir: str, env_name: str) -> None
         print(f"\n[X] PROCESSING ERRORS ({len(error_files)}):")
         # print("\n".join(error_files))
     print(f"="*50 + "\n")
-    df.to_csv(csv_path, index=False)
-    print(f"[{env_name}] Updated column in CSV: {raw_time_col}")
-    print(f"[{env_name}] CSV path: {csv_path}")
 
 def main():
     SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
     REPO_ROOT = os.path.dirname(SCRIPT_DIR)
     CSV_PATH = os.path.join(REPO_ROOT, "csvs", "CycPeptMPDB-4D.csv")
-    DATA_ROOT = os.path.join(os.path.dirname(REPO_ROOT), "Data", "CycPeptMPDB_4D")
+    DATA_ROOT = os.path.join(os.path.dirname(REPO_ROOT), "Data", "CycPeptMPDB_4D", "June2026")
     
     process_structures(CSV_PATH, DATA_ROOT, "Water")
     # process_structures(CSV_PATH, DATA_ROOT, "Hexane")

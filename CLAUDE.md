@@ -56,14 +56,13 @@ DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
 
 ### `dataprocessor/` — Data pipeline scripts
 
-Each script reads raw simulation output (`.dat` files, PDB trajectories) from the external Data directory and merges results into `csvs/CycPeptMPDB-4D.csv`. Key scripts:
-- **ReadSA.py** — reads surface area `.dat` files (SASA, PSA, NPSA) for both solvents
-- **ReadMMPBSA.py** — reads MMPBSA desolvation free energy data
-- **ReadAvgRMSD.py** — reads average pairwise RMSD data
+Each script works on the raw simulation output (PDB trajectories, GROMACS logs) in the external Data directory — extracting structures, computing dihedrals, or validating completeness. Key scripts:
 - **OmegaComputer.py** — computes backbone omega dihedral angles from PDB trajectories using NetworkX bond graphs; uses `Monomer_Length_in_Main_Chain` for backbone cycle detection
 - **ExtractMiddleConf.py** — extracts representative (middle) conformations from trajectory clusters
 - **MissingDataChecker.py** — validates completeness of the dataset
-- **CheckExistRename.py** — checks file existence and handles renaming
+- **MissingPeptidesExporter.py** — writes `csvs/missing_peptides.csv` (in-scope PAMPA peptides not simulated)
+
+> **Descriptor columns are static.** The SASA/NPSA/PSA, avgRMSD, avgGR, and desolvation columns in `CycPeptMPDB-4D.csv` were produced by a one-off merge from GROMACS metric files that have since been removed; the dedicated readers (ReadSA/ReadMMPBSA/ReadAvgRMSD) were deleted along with them. Regenerating those columns means re-running GROMACS analysis on the trajectories.
 
 ### `dataprocessor/utils.py` — Shared alias matching
 

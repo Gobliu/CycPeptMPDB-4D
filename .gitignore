@@ -26,3 +26,9 @@ cycpeptmpdb-a-comprehensive-database-of-membrane-permeability-of-cyclic-peptides
 Untitled.jpeg
 # Excel lock/temp files
 ~$*.xlsx
+
+# regenerable OmegaComputer backbone logs
+logs/Irregular_Backbone_*.txt
+
+# training model checkpoints (train_se3.py output)
+checkpoints/

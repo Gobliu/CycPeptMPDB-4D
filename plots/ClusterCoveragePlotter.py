@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from matplotlib.transforms import ScaledTranslation
 
 # --- Paths ---
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -34,7 +35,7 @@ topn_labels = [s.replace("top_", "Top ").replace("Top all", "All")
 
 # --- Plot ---
 sns.set_theme(style="whitegrid", context="talk")
-fig, axes = plt.subplots(1, 2, figsize=(15, 5.5))
+fig, axes = plt.subplots(1, 2, figsize=(16.5, 5.5))
 
 # (a) Cumulative coverage vs number of clusters
 ax = axes[0]
@@ -49,7 +50,7 @@ ax.set_xlim(1, N_CLUSTERS_SHOWN)
 ax.set_ylim(0, 100)
 ax.set_xlabel("Number of clusters", fontsize=16)
 ax.set_ylabel("Cumulative coverage (%)", fontsize=16)
-ax.set_title("(a) Coverage vs cluster count (300 frames)", fontsize=16)
+ax.set_title("Coverage vs cluster count (300 frames)", fontsize=16)
 ax.legend(loc="lower right", frameon=False, fontsize=14)
 
 # (b) Mean coverage retained by the top-N clusters (pooled summary)
@@ -62,9 +63,9 @@ ax.set_xticks(xpos)
 ax.set_xticklabels(topn_labels)
 ax.set_xlim(-0.4, len(summary) - 0.6)
 ax.set_ylim(80, 102)
-ax.set_xlabel("Clusters retained", fontsize=16)
-ax.set_ylabel("Coverage (%)", fontsize=16)
-ax.set_title("(b) Coverage by top-N clusters", fontsize=16)
+ax.set_xlabel("Top-N clusters of 300 frames", fontsize=16)
+ax.set_ylabel("Coverage by 100 frames (%)", fontsize=16)
+ax.set_title("Cluster coverage (100 vs. 300 frames)", fontsize=16)
 
 for ax in axes:
     ax.grid(alpha=0.3)
@@ -73,7 +74,13 @@ for ax in axes:
         spine.set_linewidth(1.5)
         spine.set_edgecolor("black")
 
+# Bold panel letters at each panel's top-left corner (matches Figure2-6)
+label_offset = ScaledTranslation(-34 / 72, 6 / 72, fig.dpi_scale_trans)
+for ax, letter in zip(axes, "ab"):
+    ax.text(0.0, 1.0, letter, transform=ax.transAxes + label_offset,
+            fontsize=22, fontweight="bold", va="bottom", ha="right")
+
 plt.tight_layout()
-fig.savefig(SCRIPT_DIR / "ClusterCoveragePlotter.png", dpi=300,
-            bbox_inches="tight")
+fig.savefig(SCRIPT_DIR / "ClusterCoveragePlotter.pdf", bbox_inches="tight")           # vector, for LaTeX
+fig.savefig(SCRIPT_DIR / "ClusterCoveragePlotter.png", dpi=300, bbox_inches="tight")  # preview only
 plt.show()

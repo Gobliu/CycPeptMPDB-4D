@@ -57,9 +57,9 @@ for ax, pid, letter in zip(axes.flat, PEPTIDES, "abcdef"):
                     frameon=True, framealpha=0.85, edgecolor="grey")
     leg.get_frame().set_linewidth(0.9)
 
-    # Peptide id as a large label centered at the top of the panel
+    # Peptide id as the panel title, centered at the top (title size, 16)
     ax.text(0.5, 0.96, pid, transform=ax.transAxes,
-            ha="center", va="top", fontsize=22, fontweight="bold")
+            ha="center", va="top", fontsize=16, fontweight="bold")
     # Bold panel letter at the top-left corner
     ax.text(0.0, 1.0, letter, transform=ax.transAxes + letter_offset,
             fontsize=22, fontweight="bold", va="bottom", ha="right")

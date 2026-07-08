@@ -1,0 +1,58 @@
+*HEADER    PEPTIDE BINDING PROTEIN                 02-JAN-21   7L96              
+*TITLE     CONNECTING HYDROPHOBIC SURFACES IN CYCLIC PEPTIDES INCREASES MEMBRANE 
+*TITLE    2 PERMEABILITY                                                         
+*COMPND    MOL_ID: 1;                                                            
+*COMPND   2 MOLECULE: CYCLIC PEPTIDE LEU-DLE-LEU-LEU-DPR-N9K;                    
+*COMPND   3 CHAIN: A;                                                            
+*COMPND   4 ENGINEERED: YES                                                      
+*SOURCE    MOL_ID: 1;                                                            
+*SOURCE   2 SYNTHETIC: YES;                                                      
+*SOURCE   3 ORGANISM_SCIENTIFIC: HOMO SAPIENS;                                   
+*SOURCE   4 ORGANISM_COMMON: HUMAN;                                              
+*SOURCE   5 ORGANISM_TAXID: 9606                                                 
+*KEYWDS    CYCLIC PEPTIDE, PEPTIDE BINDING PROTEIN                               
+*EXPDTA    SOLUTION NMR                                                          
+*NUMMDL    5                                                                     
+*AUTHOR    H.N.HOANG                                                             
+*REVDAT   2   15-NOV-23 7L96    1                                                
+*REVDAT   1   09-AUG-23 7L96    0                                                
+# Restraints file 1: NOEtable_compound4.tbl
+! P4 (274) cyclic NOE Assignment Table (from visual inspection)
+
+! [LNCH3lLLpY]  > 9(S) 8-6(M) 5-3 (W) and 2-1 (vW)
+
+!L1
+assi(resi 1  and name  HA )(resi  1  and name  HN )       0.0 0.0 	6.0	  ! (2)vw
+assi(resi 1  and name  HA )(resi  2  and name  HN )       0.0 0.0 	3.5	  ! (7)m
+assi(resi 1  and name  HN )(resi  2  and name  HN )       0.0 0.0 	3.5	  ! (6)m
+
+!l2
+assi(resi 2  and name  HA  )(resi  2  and name  HN )       0.0 0.0 	5.0	  ! (4)w
+assi(resi 2  and name  HA  )(resi  3  and name  HN )       0.0 0.0 	6.0	  ! (2)vW
+
+!L3
+assi(resi 3  and name  HA   )(resi  4  and name  HN )       0.0 0.0 	5.0	  ! (4)w
+assi(resi 3  and name  HA   )(resi  3  and name  HN )       0.0 0.0 	5.0	  ! (4)w
+assi(resi 3  and name  HN   )(resi  4  and name  HN )       0.0 0.0 	3.5	  ! (7)m
+
+!l4
+assi(resi 4  and name  HN  )(resi  2  and name  HN  )       0.0 0.0 	6.0       ! (1)v w
+assi(resi 4  and name  HA  )(resi  5  and name  HD1 )       0.0 0.0 	3.0       ! (10)
+assi(resi 4  and name  HA  )(resi  5  and name  HD2 )       0.0 0.0 	3.0       ! (10) 
+assi(resi 4  and name  HN  )(resi  1  and name  HN  )       0.0 0.0 	6.0       ! (1)vW
+
+!P5
+assi(resi 5  and name  HA  )(resi  1  and name  HN )       0.0 0.0 	6.0       ! (1)vw
+
+!Y6
+assi(resi 6  and name  H4 )(resi  1  and name  HN )       0.0 0.0 	5.0       ! (5)w
+assi(resi 6  and name  H4 )(resi  2  and name  HN )       0.0 0.0 	5.0       ! (3)v
+
+!H-Bonds
+
+assign (resid  1 and name  O     )(resid 4 and name  HN   ) 1.88 0.3 0.42
+assign (resid  1 and name  O     )(resid 4 and name  N    ) 2.88 0.3 0.3
+
+assign (resid  4 and name  O     )(resid 1 and name  HN   ) 1.88 0.3 0.42
+assign (resid  4 and name  O     )(resid 1 and name  N    ) 2.88 0.3 0.3
+

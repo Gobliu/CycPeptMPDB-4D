@@ -186,7 +186,8 @@ def torsion_angle(conf, atom_sets):
 # ── Distribution functions ───────────────────────────────────────────────────
 
 def _init_irregular_log(log_name):
-    """Clear the irregular backbone log at the start of each run."""
+    """Clear the irregular backbone log at the start of each run (creating logs/ if absent)."""
+    Path(log_name).parent.mkdir(parents=True, exist_ok=True)
     open(log_name, 'w').close()
     return set()
 
@@ -212,7 +213,7 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
     irregular = _init_irregular_log(log_name)
 
     sdf_dir = str(DATA_DIR / 'sdf_and_json')
-    df = pd.read_csv(REPO_ROOT / "csvs" / 'summary_cycpeptmpdb.csv', low_memory=False)
+    df = pd.read_csv(REPO_ROOT / "csvs" / 'cremp_sequences.csv', low_memory=False)
 
     for _, row in df.iterrows():
         sdf_path = f"{sdf_dir}/{row.sequence}.sdf"
@@ -221,7 +222,8 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
         c_list = read_sdf(sdf_path)
         bonds, atom_types = infer_bonds(c_list[0])
         graph = build_graph(atom_types, bonds)
-        backbone_set = find_backbone_cycle(graph, atom_types, residue_len=row.num_monomers)
+        residue_len = len(row.sequence.split('.'))  # monomer count = dot-separated tokens
+        backbone_set = find_backbone_cycle(graph, atom_types, residue_len=residue_len)
         if not backbone_set:
             with open(log_name, 'a') as f:
                 f.write(f'{sdf_path}\n')
@@ -237,36 +239,56 @@ def omega_distribution_cremp(bins=360, range_degrees=(0, 360)):
     return hist_total, bin_centers, bin_edges
 
 
+def _load_n_extra_from_4d():
+    """Map CycPeptMPDB_ID -> n_extra (count of BHF/TNH backbone-extending residues).
+
+    n_extra is read from residue names in the 4D representative structures; the raw
+    .mol files carry no residue names, so it cannot be derived from them directly.
+    """
+    df4 = pd.read_csv(REPO_ROOT / "csvs" / 'CycPeptMPDB-4D.csv', low_memory=False)
+    str_dir = DATA_DIR / 'CycPeptMPDB_4D' / 'June2026' / 'Water' / 'Structures'
+    n_extra_by_id = {}
+    for _, r in df4.iterrows():
+        pdb = str_dir / f"{str(r.Source).strip()}_{r.CycPeptMPDB_ID}_H2O_Str.pdb"
+        if pdb.exists():
+            n_extra_by_id[r.CycPeptMPDB_ID] = count_extra_backbone_atoms(str(pdb))
+    return n_extra_by_id
+
+
 def omega_distribution_cycpeptmpdb(bins=360, range_degrees=(0, 360)):
     hist_total = np.zeros(bins)
     bin_edges = None
     log_name = str(REPO_ROOT / 'logs' / f'Irregular_Backbone_CycPeptMPDB.txt')
     irregular = _init_irregular_log(log_name)
 
+    # Backbone ring length = Monomer_Length_in_Main_Chain (not the full Monomer_Length,
+    # which is wrong for Lariats) + n_extra backbone-extending atoms (BHF/TNH).
+    n_extra_by_id = _load_n_extra_from_4d()
+
     missing_count = 0
     irregular_count = 0
+    df = pd.read_csv(REPO_ROOT / "csvs" / 'CycPeptMPDB_Peptide_All.csv',
+                     low_memory=False, encoding='utf-8-sig')
     for env, suffix in [('water', '_H2O'), ('vacuum', ''), ('chloroform', '_CHCl3')]:
         mol_dir = str(DATA_DIR / 'cycpeptmpdb_3d' / 'content' / 'data' / env)
-        df = pd.read_csv(REPO_ROOT / "csvs" / 'CycPeptMPDB_Peptide_All.csv', low_memory=False)
         for _, row in df.iterrows():
             mol_path = f"{mol_dir}/CycPeptMPDB_ID_{row.CycPeptMPDB_ID}{suffix}.mol"
             if not os.path.exists(mol_path):
                 missing_count += 1
-                print(f"[missing    #{missing_count}] {mol_path}")
                 continue
             if mol_path in irregular:
                 continue
             c_list = read_sdf(mol_path)
             bonds, atom_types = infer_bonds(c_list[0])
             graph = build_graph(atom_types, bonds)
-            # 'ac-' (N-acetyl cap) replaces one backbone N with CH3-CO-, shrinking the
-            # backbone ring by 1 atom. Pass n_extra=-1 to adjust loop_len accordingly.
-            has_ac = "'ac-'" in str(row.get('Sequence', ''))
-            n_extra = -1 if has_ac else 0
-            backbone_set = find_backbone_cycle(graph, atom_types, residue_len=row.Monomer_Length, n_extra=n_extra)
+            residue_len = int(row.Monomer_Length_in_Main_Chain
+                              if pd.notna(row.Monomer_Length_in_Main_Chain)
+                              else row.Monomer_Length)
+            n_extra = n_extra_by_id.get(row.CycPeptMPDB_ID, 0)
+            backbone_set = find_backbone_cycle(graph, atom_types,
+                                               residue_len=residue_len, n_extra=n_extra)
             if not backbone_set:
                 irregular_count += 1
-                print(f"[irregular  #{irregular_count}] {mol_path}")
                 with open(log_name, 'a') as f:
                     f.write(f'{mol_path}\n')
                 continue
@@ -403,15 +425,15 @@ if __name__ == "__main__":
     CSV_PATH = str(REPO_ROOT / "csvs" / "CycPeptMPDB-4D.csv")
     ENV_SUFFIX_MAP = {"Water": "H2O", "Hexane": "Hexane"}
 
-    hist_total, bin_centers, bin_edges = omega_distribution_cremp()
+    # hist_total, bin_centers, bin_edges = omega_distribution_cremp()
     # hist_total, bin_centers, bin_edges = omega_distribution_cycpeptmpdb()
 
-    # for env, suffix in ENV_SUFFIX_MAP.items():
-    #     hist_total, bin_centers, bin_edges = omega_distribution_4d(
-    #         env, suffix,
-    #         str(DATA_DIR_4D / env / "Structures"),
-    #         CSV_PATH,
-    #     )
+    for env, suffix in ENV_SUFFIX_MAP.items():
+        hist_total, bin_centers, bin_edges = omega_distribution_4d(
+            env, suffix,
+            str(DATA_DIR_4D / env / "Structures"),
+            CSV_PATH,
+        )
 
     # plt.figure(figsize=(8, 5))
     # plt.bar(bin_centers, hist_total, width=(bin_edges[1] - bin_edges[0]), align='center', edgecolor='k')

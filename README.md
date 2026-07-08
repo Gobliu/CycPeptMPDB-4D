@@ -58,6 +58,28 @@ File naming pattern: `{Source}_{CycPeptMPDB_ID}_{Env}_Traj.pdb` / `..._Str.pdb`
 | `Hexane_3D_PSA` | Polar Surface Area in hexane (nm²) |
 | `Hexane_3D_NPSA` | Non-Polar Surface Area in hexane (nm²) |
 
+### Peptides not simulated (`csvs/missing_peptides.csv`)
+
+Of the 5,427 peptides with PAMPA data across the five source publications,
+5,160 were simulated and form CycPeptMPDB-4D; the remaining **267** were not
+simulated and are listed in `csvs/missing_peptides.csv`. This file carries only
+the identity and experimental columns shared with the main CSV — it has no
+MD-derived descriptors (RMSD, surface area, MMPBSA, representative frames),
+since these peptides have no trajectories.
+
+| Column | Description |
+|---|---|
+| `CycPeptMPDB_ID` | Unique identifier from the original CycPeptMPDB |
+| `Source` | Reference literature for the peptide data |
+| `SMILES` | Isomeric SMILES of the peptide |
+| `Sequence` | List of monomer symbols making up the peptide |
+| `Original_Name_in_Source_Literature` | Original peptide designation in the source literature |
+| `Structurally_Unique_ID` | Identifier grouping structurally identical peptides across sources |
+| `PAMPA` | Experimental membrane permeability (log cm/s) |
+| `Monomer_Length` | Total number of monomers in the peptide |
+| `Monomer_Length_in_Main_Chain` | Monomers in the main-chain cycle (differs from `Monomer_Length` for lariat-shaped peptides) |
+| `Molecule_Shape` | Structural topology (e.g., Circle, Lariat) |
+
 ## Setup
 
 Clone this repository and download the dataset into a sibling `Data/` folder:
@@ -80,7 +102,8 @@ relative to the repository root.
 ```
 CycPeptMPDB-4D/                  (this repo)
 ├── csvs/                        CSV data files
-│   └── CycPeptMPDB-4D.csv       main dataset
+│   ├── CycPeptMPDB-4D.csv       main dataset
+│   └── missing_peptides.csv     PAMPA peptides not simulated
 ├── train_se3.py                 usage example: SE(3)-Transformer training
 ├── dataprocessor/               scripts used to build the dataset (not needed for general use)
 ├── plots/                       scripts used to generate figures

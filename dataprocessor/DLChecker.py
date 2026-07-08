@@ -26,15 +26,17 @@ Run standalone per peptide.
 """
 import numpy as np
 
-BOND_MAX = 1.8  # max heavy-atom covalent bond length (Angstrom)
+BOND_MAX = 1.8   # max heavy-atom covalent bond length (Angstrom)
+H_BOND_MAX = 1.3  # max C-H bond length (Angstrom); heavy neighbours sit >=1.4 A away
 
 
 def dl_checker(pdb_path, res_length):
     """Return an int array of length res_length: +1 L, -1 D, 0 achiral.
 
     Residues are read by PDB sequence number and must be numbered
-    1..res_length (main-chain order). Glycine (no CB/HA) reports 0; any other
-    residue missing a required atom raises (fast-fail).
+    1..res_length (main-chain order). A residue whose Cα does not carry exactly
+    one hydrogen (glycine/sarcosine: 2 H; Aib-like: 0 H) reports 0; any other
+    residue missing a required backbone/sidechain atom raises (fast-fail).
     """
     residues = _read_residue_atoms(pdb_path, res_length)
 
@@ -52,15 +54,21 @@ def _residue_chirality(atoms, res_num):
         if required not in atoms:
             raise ValueError(f"residue {res_num}: missing backbone atom {required}")
 
-    has_cb, has_ha = "CB" in atoms, "HA" in atoms
-    if not has_cb and not has_ha:
-        return 0  # glycine (and Aib-like) -> achiral, no Cα-H stereocenter
-    if not (has_cb and has_ha):
-        raise ValueError(
-            f"residue {res_num}: has exactly one of CB/HA (CB={has_cb}, HA={has_ha})"
-        )
+    ca, n, c = atoms["CA"], atoms["N"], atoms["C"]
 
-    ca, n, c, cb, ha = (atoms[k] for k in ("CA", "N", "C", "CB", "HA"))
+    # A Cα is a stereocenter only if it carries exactly one hydrogen. Count the
+    # hydrogens bonded to CA geometrically (naming-independent), so glycine and
+    # sarcosine (2 H on CA) and Aib-like residues (0 H, two methyls) are all
+    # correctly reported achiral regardless of how the H atoms are named.
+    h_on_ca = [xyz for name, xyz in atoms.items()
+               if name.startswith("H") and _dist(ca, xyz) <= H_BOND_MAX]
+    if len(h_on_ca) != 1:
+        return 0  # 0 H (Aib) or >=2 H (Gly/Sar) -> no Cα-H stereocenter
+    ha = h_on_ca[0]
+
+    if "CB" not in atoms:
+        raise ValueError(f"residue {res_num}: chiral Cα (1 H) but no CB sidechain atom")
+    cb = atoms["CB"]
 
     if _dist(ca, c) <= BOND_MAX:
         # alpha-amino acid: CA bonded to its carbonyl. sidechain = CB, apex = C

@@ -29,6 +29,8 @@ CycPeptMPDB-4D/
 │   ├── Trajectories/
 │   ├── Structures/
 │   └── Logs/
+├── CHCl3/                      (validation set, 6 peptides)
+│   └── *_CHCl3_Traj.pdb        NMR-validation trajectories
 └── CycPeptMPDB-4D.csv          metadata & molecular descriptors
 ```
 

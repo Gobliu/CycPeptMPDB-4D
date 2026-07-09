@@ -68,19 +68,6 @@ the identity and experimental columns shared with the main CSV — it has no
 MD-derived descriptors (RMSD, surface area, MMPBSA, representative frames),
 since these peptides have no trajectories.
 
-| Column | Description |
-|---|---|
-| `CycPeptMPDB_ID` | Unique identifier from the original CycPeptMPDB |
-| `Source` | Reference literature for the peptide data |
-| `SMILES` | Isomeric SMILES of the peptide |
-| `Sequence` | List of monomer symbols making up the peptide |
-| `Original_Name_in_Source_Literature` | Original peptide designation in the source literature |
-| `Structurally_Unique_ID` | Identifier grouping structurally identical peptides across sources |
-| `PAMPA` | Experimental membrane permeability (log cm/s) |
-| `Monomer_Length` | Total number of monomers in the peptide |
-| `Monomer_Length_in_Main_Chain` | Monomers in the main-chain cycle (differs from `Monomer_Length` for lariat-shaped peptides) |
-| `Molecule_Shape` | Structural topology (e.g., Circle, Lariat) |
-
 ## Setup
 
 Clone this repository and download the dataset into a sibling `Data/` folder:

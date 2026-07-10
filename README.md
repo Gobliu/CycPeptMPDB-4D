@@ -6,7 +6,7 @@ adding MD-derived 3D conformations in two solvent environments (hexane and water
 for 5,160 cyclic peptides, along with computed molecular descriptors.
 
 - **Publication:** (Link to be added upon publication)
-- **Dataset:** [Zenodo](https://doi.org/10.5281/zenodo.18754430)
+- **Dataset:** [Zenodo](https://doi.org/10.5281/zenodo.21274695)
 
 ## Dataset overview
 

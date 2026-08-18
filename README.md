@@ -5,7 +5,7 @@ CycPeptMPDB-4D extends [CycPeptMPDB](https://www.biosino.org/CycPeptMPDB/) by
 adding MD-derived 3D conformations in two solvent environments (hexane and water)
 for 5,160 cyclic peptides, along with computed molecular descriptors.
 
-- **Publication:** (Link to be added upon publication)
+- **Publication:** [Multi-solvent conformational ensembles for predicting cyclic peptide permeability](https://doi.org/10.1038/s41597-026-07984-9)
 - **Dataset:** [Zenodo](https://doi.org/10.5281/zenodo.21274695)
 
 ## Dataset overview

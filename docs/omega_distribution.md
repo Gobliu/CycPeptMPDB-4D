@@ -16,7 +16,7 @@ not an artifact, for two reasons:
    not only method.
 
 2. **Method — classical MD vs QM-refined conformers.** CycPeptMPDB-4D ω comes from
-   finite-temperature classical MD (AMBER99SB), which samples thermal fluctuation of a softer
+   finite-temperature classical MD (AMBER ff14SB), which samples thermal fluctuation of a softer
    amide torsion; CREMP is a QM-refined conformer ensemble. Classical MD gives inherently
    broader ω (~2× the crystallographic ~6°) even for standard residues, which accounts for the
    ~11° baseline seen above.

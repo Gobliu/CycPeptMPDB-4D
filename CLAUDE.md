@@ -54,6 +54,10 @@ DATA_DIR = REPO_ROOT.parent / "Data" / "CycPeptMPDB_4D"
 
 ## Architecture
 
+### `md_protocol/` — MD simulation protocol
+
+Example input files for the simulation pipeline that generated the dataset (one peptide, hexane): AMBER parameterization (`tleap.in`, custom residue frcmod/lib files, `acpype.py` for AMBER→GROMACS conversion), GROMACS `.mdp` files (`em1` minimization, `pr1`–`pr4` equilibration, `md1_SA` simulated annealing, `md2`/`md3` production — md3 is 50 ns at 300 K/1 bar), and the pre-equilibrated hexane box (`901Hexane.gro`, `HEX.itp`). Illustrative, not a complete runnable set (some frcmod/lib files referenced by `tleap.in` are not included).
+
 ### `dataprocessor/` — Data pipeline scripts
 
 Each script works on the raw simulation output (PDB trajectories, GROMACS logs) in the external Data directory — extracting structures, computing dihedrals, or validating completeness. Key scripts:

@@ -1,0 +1,45 @@
+title = TC5B 
+
+cpp = /usr/bin/cpp
+constraints = hbonds 
+integrator = md
+dt = 0.002 ; ps !
+nsteps = 10000 ; total 20.0 ps.
+
+nstxout = 0 ; collect data every 0.5 ps
+nstxtcout = 50000
+nstvout = 0
+nstfout = 0
+nstlog = 50000
+nstenergy = 50000
+nstlist = 5
+ns_type = grid
+rlist = 1.0 
+coulombtype = PME 
+rcoulomb = 1.0 
+rvdw = 1.0
+fourierspacing = 0.12
+pme_order = 4
+ewald_rtol = 1e-5
+optimize_fft = yes
+; Berendsen temperature coupling is on in two groups
+Tcoupl = Nose-Hoover
+tc-grps = system ; Protein SOL_Ion
+tau_t = 0.5  ; 0.5              ; use items in bold if you have Cl ions
+ref_t = 300  ; 300  
+;Pressure coupling is on
+pcoupl          = Berendsen ; Parrinello-Rahman     ; Pressure coupling on in NPT
+pcoupltype      = isotropic         ; uniform scaling of x-y box vectors, independent z
+tau_p           = 1.0                        ; time constant, in ps
+ref_p           = 1.0              ; reference pressure, x-y, z (in bar)
+compressibility = 4.5e-5  ; isothermal compressibility, bar^-1
+; Generate velocites is on at 300 K.
+gen_vel = no 
+gen_temp = 300.0
+gen_seed = 173529
+; These options remove motion of the protein/bilayer relative to the solvent/ions
+nstcomm         = 5 
+comm-mode       = Linear
+;comm-grps       = Protein SOL_Ion
+cutoff-scheme = Verlet
+DispCorr = EnerPres

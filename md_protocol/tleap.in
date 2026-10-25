@@ -1,0 +1,16 @@
+source leaprc.protein.ff14SB
+loadamberparams frcmod.MAL
+loadoff MAL.lib
+loadamberparams frcmod.MLE
+loadoff MLE.lib
+loadamberparams frcmod.TNH
+loadoff TNH.lib
+
+addpdbresmap { {0 "ACE" "ACE"} }
+addpdbresmap { {1 "PRO" "PRO"} }
+pep = loadPdb pep.pdb
+bond pep.4.OG1 pep.10.C
+set pep box {60.0 60.0 60.0}
+saveAmberParm pep pep.prmtop pep.crd
+savepdb pep pep-now.pdb
+quit

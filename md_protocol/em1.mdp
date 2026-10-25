@@ -1,0 +1,25 @@
+title = fullerene 
+cpp = /usr/bin/cpp ; the c pre-processor
+define = -DFLEXIBLE
+constraints = none 
+integrator = steep 
+dt = 0.002 ; ps !
+nsteps = 500
+nstlist = 5
+ns_type = grid
+rlist = 1.4 
+coulombtype = PME
+rcoulomb = 1.4
+rvdw = 1.4
+fourierspacing = 0.12
+fourier_nx = 0
+fourier_ny = 0
+fourier_nz = 0
+pme_order = 4
+ewald_rtol = 1e-5
+optimize_fft = yes
+;
+; Energy minimizing stuff
+;
+emtol = 0.001
+emstep = 1.1

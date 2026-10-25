@@ -1,0 +1,46 @@
+constraints = h-bonds 
+integrator = md
+dt = 0.001 ; 
+nsteps = 5000000 ; 
+
+nstxout = 0 ; 
+nstxtcout = 50000
+nstvout = 0
+nstfout = 0
+nstlog = 50000
+nstenergy = 50000
+nstlist = 5
+ns_type = grid
+rlist = 1.0 
+coulombtype = PME 
+rcoulomb = 1.0 
+rvdw = 1.0
+fourierspacing = 0.12
+pme_order = 4
+ewald_rtol = 1e-5
+optimize_fft = yes
+Tcoupl = Nose-Hoover
+tc-grps = system 
+tau_t = 0.5  
+ref_t = 300   
+pcoupl          = Berendsen ; Pressure coupling on in NPT
+pcoupltype      = isotropic       
+tau_p           = 1.0            
+ref_p           = 1.0           
+compressibility = 4.5e-5  
+gen_vel = no 
+gen_temp = 300.0
+gen_seed = 73529
+
+nstcomm         = 5 
+comm-mode       = Linear
+cutoff-scheme = Verlet
+DispCorr = EnerPres
+
+annealing = periodic
+annealing-npoints =  4
+annealing-time =     0  500  2000 2500
+annealing-temp =    300  350   350  300
+
+
+
